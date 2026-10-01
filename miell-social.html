@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Miell Tirana — Social — Bloom Studios</title>
+<style>
+
+  @font-face{
+    font-family:'Aileron';
+    src:url(assets/ee9d845c2b370a3a.otf) format('opentype');
+    font-weight:100;
+    font-style:normal;
+    font-display:swap;
+  }
+  @font-face{
+    font-family:'Aileron';
+    src:url(assets/ee4b6ef0bb1606ef.otf) format('opentype');
+    font-weight:200;
+    font-style:normal;
+    font-display:swap;
+  }
+  @font-face{
+    font-family:'Aileron';
+    src:url(assets/bf29e850d4c6dc3c.otf) format('opentype');
+    font-weight:300;
+    font-style:normal;
+    font-display:swap;
+  }
+  @font-face{
+    font-family:'Aileron';
+    src:url(assets/5a78965873fbce38.otf) format('opentype');
+    font-weight:400;
+    font-style:normal;
+    font-display:swap;
+  }
+  @font-face{
+    font-family:'Aileron';
+    src:url(assets/3c4affc8a57d6915.otf) format('opentype');
+    font-weight:600;
+    font-style:normal;
+    font-display:swap;
+  }
+  @font-face{
+    font-family:'Aileron';
+    src:url(assets/9daa863f1c9a0f9e.otf) format('opentype');
+    font-weight:700;
+    font-style:normal;
+    font-display:swap;
+  }
+  @font-face{
+    font-family:'Aileron';
+    src:url(assets/56a9def7cf4ad3ef.otf) format('opentype');
+    font-weight:800;
+    font-style:normal;
+    font-display:swap;
+  }
+  @font-face{
+    font-family:'Aileron';
+    src:url(assets/f9c3d80856ec2f23.otf) format('opentype');
+    font-weight:900;
+    font-style:normal;
+    font-display:swap;
+  }
+
+  :root{
+    --ink:#152230;
+    --cream:#ffffff;
+    --paper:#f7f1e3;
+    --lime:#e7ec7d;
+    --lime-2:#dfe86a;
+    --maroon:#5a1418;
+    --grey:#d9d9d6;
+    --grey-line:#e4e3df;
+    --muted:#5c6570;
+    --max:1240px;
+    font-family:'Aileron', sans-serif;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Aileron', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 48px;}
+  .page{display:none;}
+  .page.active{display:block;}
+
+  /* ---------- Header ---------- */
+  header{position:sticky; top:0; z-index:50; background:var(--cream);}
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:26px 48px;}
+  .logo-mark{font-family:'Aileron', sans-serif; font-weight:800; font-size:17px; line-height:0.85; letter-spacing:-0.02em; text-transform:lowercase; cursor:pointer; display:inline-block;}
+  .logo-mark img{height:60px; width:auto; display:block;}
+  .nav-links{display:flex; gap:36px; font-size:12.5px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase;}
+  .nav-links a{position:relative; padding-bottom:3px; transition:opacity .2s ease; cursor:pointer;}
+  .nav-links a:hover{opacity:.55;}
+  .nav-links a.active::after{content:""; position:absolute; left:0; right:0; bottom:-3px; height:2px; background:var(--ink);}
+  .menu-btn{display:none; background:none; border:none; cursor:pointer;}
+  .menu-btn span, .menu-btn span::before, .menu-btn span::after{content:""; display:block; width:22px; height:2px; background:var(--ink); position:relative; margin:5px 0;}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:64px 48px 0; min-height:100vh; display:flex; flex-direction:column; justify-content:center; box-sizing:border-box;}
+  .hero-grid{display:grid; width:100%; grid-template-columns:1.1fr 0.9fr; gap:24px; align-items:start; max-width:1240px; margin:0 auto;}
+  .hero h1{font-family:'Aileron', sans-serif; font-weight:800; font-size:clamp(58px, 7.8vw, 108px); line-height:0.94; letter-spacing:-0.01em; text-transform:uppercase; color:var(--ink);}
+  .hero-right{padding-top:8px;}
+  .hero-sub{font-size:12.5px; font-weight:600; line-height:1.55; letter-spacing:0.02em; text-align:right; color:var(--ink); margin-bottom:22px;}
+  .hero-reel{width:clamp(210px, 21vw, 300px); aspect-ratio:9/16; margin-left:auto; border-radius:0; overflow:hidden; box-shadow:0 18px 40px rgba(21,34,48,.22); background:var(--ink);}
+  .hero-reel video{width:100%; height:100%; object-fit:cover; display:block;}
+  .hero-media{width:100%; aspect-ratio:4/3; background:var(--grey); margin-left:auto; object-fit:cover;}
+  .hero-slideshow{position:fixed; top:50%; right:32px; transform:translateY(-50%); width:190px; height:245px; overflow:hidden; background:var(--grey); box-shadow:0 10px 30px rgba(21,34,48,.18); z-index:60;}
+  .hero-slide{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; background:var(--grey); opacity:0; transition:opacity .15s ease;}
+  .hero-slide.active{opacity:1;}
+  .hero-slideshow-label{position:absolute; left:8px; bottom:8px; z-index:2; font-size:9px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#fff; text-shadow:0 1px 3px rgba(0,0,0,.5);}
+  .scroll-cue{margin-top:64px; font-size:11.5px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); cursor:pointer; display:inline-block;}
+  .reveal{opacity:0; transform:translateY(28px); transition:opacity .8s cubic-bezier(.16,.8,.3,1), transform .8s cubic-bezier(.16,.8,.3,1);}
+  .reveal.in-view{opacity:1; transform:none;}
+  .reveal-1{transition-delay:.08s;}
+  .reveal-2{transition-delay:.16s;}
+  .reveal-3{transition-delay:.24s;}
+  .hero h1 .word-wrap{display:inline-block; overflow:hidden; vertical-align:top; padding-bottom:0.08em; margin-bottom:-0.08em;}
+  .hero h1 .word-wrap > span{display:inline-block; transform:translateY(115%); opacity:0; transition:transform 1s cubic-bezier(.16,.8,.3,1), opacity .7s ease;}
+  .hero h1.in-view .word-wrap > span{transform:translateY(0); opacity:1;}
+  .hero-photo{margin-top:40px; width:100%; max-width:1240px; margin-left:auto; margin-right:auto; aspect-ratio:16/6.2; object-fit:cover; object-position:center 52%; background:#e9e9e6;}
+
+  /* ---------- About ---------- */
+  .about{padding:120px 48px;}
+  .about-grid{display:grid; width:100%; grid-template-columns:300px 1fr; gap:40px; align-items:start; max-width:1240px; margin:0 auto;}
+  h2.section-title{font-family:'Aileron', sans-serif; font-weight:800; font-size:clamp(32px, 3.6vw, 44px); letter-spacing:-0.01em; color:var(--ink); text-transform:uppercase;}
+  .eyebrow{display:inline-block; margin-top:18px; font-size:11.5px; font-weight:700; letter-spacing:0.06em; color:var(--muted); cursor:pointer;}
+  .about-copy p{font-size:13.5px; line-height:1.65; color:#333d47; max-width:none; margin-bottom:16px;}
+  .about-copy p:last-child{margin-bottom:0;}
+
+  /* ---------- Mission / Vision ---------- */
+  .mv{padding:0 48px 96px; min-height:100vh; display:flex; flex-direction:column; justify-content:center; box-sizing:border-box;}
+  .mv-grid{display:grid; width:100%; grid-template-columns:1fr 1fr; gap:56px; max-width:1240px; margin:0 auto;}
+  .mv-block h3{font-family:'Aileron', sans-serif; font-weight:800; font-size:clamp(26px, 2.8vw, 34px); margin-bottom:22px; letter-spacing:-0.01em; text-transform:uppercase;}
+  .mv-media{width:100%; aspect-ratio:16/9; background:var(--grey); margin-bottom:22px;}
+  .mv-block p{font-size:13px; line-height:1.65; color:#333d47; margin-bottom:12px; max-width:none;}
+  .mv-block p:last-child{margin-bottom:0;}
+
+  /* ---------- Services ---------- */
+  .services{background:var(--lime); padding:120px 48px;}
+  .services-grid{display:grid; width:100%; grid-template-columns:300px 1fr; gap:24px; align-items:start; max-width:1240px; margin:0 auto;}
+  .services h2{font-family:'Aileron', sans-serif; font-weight:800; font-size:clamp(32px, 3.6vw, 44px); line-height:1; color:var(--ink); letter-spacing:-0.01em; text-transform:uppercase;}
+  .see-work{display:inline-block; margin-top:26px; font-size:12px; font-weight:700; letter-spacing:0.04em; color:var(--maroon); border-bottom:1.5px solid var(--maroon); padding-bottom:2px; cursor:pointer;}
+  .svc-cols{display:grid; grid-template-columns:1fr 1fr; gap:32px 48px;}
+  .svc-cat h4{font-size:11px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:var(--maroon); opacity:.75; margin-bottom:12px;}
+  .svc-cat ul{list-style:none;}
+  .svc-cat li{font-size:13.5px; font-weight:600; color:var(--ink); line-height:1.9;}
+  .svc-cat{margin-bottom:28px;}
+  .svc-cat:last-of-type, .svc-cols > .svc-cat:nth-child(3), .svc-cols > .svc-cat:nth-child(4){margin-bottom:0;}
+
+  /* ---------- Trusted by ---------- */
+  .trusted{padding:96px 48px;}
+  .trusted-grid{display:grid; width:100%; grid-template-columns:300px 1fr; gap:24px; align-items:center; max-width:1240px; margin:0 auto;}
+  .logo-grid{display:flex; flex-wrap:wrap; justify-content:center; row-gap:36px; column-gap:52px;}
+  .logo-grid .item{font-family:'Aileron', sans-serif; font-weight:800; font-size:15px; letter-spacing:0.02em; color:var(--ink); opacity:.5; display:flex; align-items:center; justify-content:center; height:42px; width:150px; flex:0 0 auto; gap:6px; transition:opacity .25s ease;}
+  .logo-grid .item:hover{opacity:.85;}
+  .logo-grid .item img{max-height:100%; max-width:100%; width:auto; height:auto; object-fit:contain; filter:grayscale(1);}
+  .logo-grid .item.featured{opacity:1; color:var(--maroon); font-size:13px; line-height:1.1; cursor:pointer; height:62px; width:170px;}
+  .logo-grid .item.featured:hover{opacity:1;}
+
+  /* ---------- Footer ---------- */
+  footer{padding:56px 48px 28px; border-top:1px solid var(--grey-line);}
+  .footer-top{display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; max-width:520px; margin-left:auto; font-size:12.5px; font-weight:600; margin-bottom:40px;}
+  .footer-top div{display:flex; flex-direction:column; gap:14px;}
+  .footer-label{font-size:10px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; opacity:.4; margin-bottom:2px;}
+  .footer-top a:hover{opacity:.6;}
+  .wordmark{display:block; width:100%; height:auto; user-select:none;}
+  .footer-bottom{display:flex; justify-content:space-between; margin-top:24px; font-size:11px; font-weight:600; letter-spacing:0.02em; color:var(--muted);}
+  .footer-bottom .legal{display:flex; gap:20px;}
+
+  /* ---------- Work page ---------- */
+  .work-hero{padding:64px 48px 8px;}
+  .work-hero h1{font-family:'Aileron', sans-serif; font-weight:800; font-size:clamp(24px, 2.6vw, 30px); letter-spacing:-0.01em; text-transform:uppercase;}
+  .work-grid{padding:56px 48px 96px; display:grid; grid-template-columns:repeat(3, 1fr); gap:32px;}
+  .work-col h4{font-size:11px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:var(--maroon); margin-bottom:18px;}
+  .work-thumb{width:100%; aspect-ratio:1/0.95; background:var(--grey); object-fit:cover; object-position:center 30%; display:block; transition:opacity .2s ease;}
+  .work-thumb.clickable{cursor:pointer;}
+  .work-thumb.clickable:hover{opacity:.75;}
+  .cat-label{padding:8px 48px 0;}
+  .cat-label h4{font-size:11px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:var(--maroon);}
+  .cat-grid{padding:24px 48px 96px; display:grid; grid-template-columns:repeat(3, 1fr); gap:32px;}
+  .cat-thumb{width:100%; aspect-ratio:1/1; background:var(--grey); margin-bottom:12px; transition:opacity .3s ease;}
+  .cat-card span{font-size:11.5px; font-weight:700; letter-spacing:0.03em; text-transform:uppercase; color:var(--ink);}
+  .cat-card.clickable{cursor:pointer;}
+  .cat-card.clickable:hover .cat-thumb{opacity:.85;}
+
+  /* ---------- Project page ---------- */
+  .proj-back{padding:48px 48px 0;}
+  .proj-back button{background:none; border:none; font-size:11.5px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); cursor:pointer;}
+  .proj-intro{padding:24px 48px 72px;}
+  .proj-intro-grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px; align-items:start;}
+  .proj-tag{font-size:11.5px; font-weight:700; letter-spacing:0.05em; color:var(--maroon); text-align:right;}
+  .proj-media{width:100%; aspect-ratio:1/1; background:var(--grey);}
+  .proj-media.cream{background:var(--paper);}
+  .proj-intro p{font-size:12.5px; line-height:1.65; color:#333d47;}
+  .proj-title{padding:0 48px 48px;}
+  .proj-title h1{font-family:'Aileron', sans-serif; font-weight:800; font-size:clamp(34px, 4.4vw, 52px); letter-spacing:-0.015em; text-transform:uppercase;}
+  .proj-pair{padding:0 48px 56px; display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  .proj-pair .proj-media{aspect-ratio:4/3;}
+  .proj-caption{padding:0 48px 64px; display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  .proj-caption p{font-size:15.5px; line-height:1.7; color:#2b333c; max-width:52ch;}
+  .proj-caption a{display:inline-block; margin-top:12px; font-size:13px; font-weight:700; color:var(--maroon); border-bottom:1.5px solid var(--maroon);}
+  .proj-section-tag{padding:0 48px; display:flex; justify-content:space-between; align-items:flex-start; gap:24px; margin-bottom:22px;}
+  .proj-section-tag p{font-size:15.5px; line-height:1.7; color:#2b333c; max-width:52ch; text-align:right;}
+  .proj-mosaic{padding:0 48px 56px; display:grid; grid-template-columns:repeat(4, 1fr); gap:14px;}
+  .proj-mosaic .proj-media{aspect-ratio:3/4;}
+  .proj-reels{padding:0 48px 96px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px; align-items:start;}
+  .proj-reel{aspect-ratio:9/16; background:var(--grey); display:flex; align-items:flex-end; padding:14px;}
+  .proj-reel span{font-size:11px; font-weight:800; letter-spacing:0.06em;}
+  .proj-reels p{font-size:12.5px; line-height:1.65; color:#333d47;}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:860px){
+    .nav{padding:20px 24px;}
+    .nav-links{position:fixed; inset:0 0 0 auto; width:78%; height:100vh; background:var(--cream); flex-direction:column; justify-content:center; align-items:flex-start; gap:26px; padding:0 40px; transform:translateX(100%); transition:transform .3s ease; font-size:15px;}
+    .nav-links.open{transform:translateX(0); box-shadow:-8px 0 30px rgba(0,0,0,.08);}
+    .menu-btn{display:block;}
+    .hero{padding:40px 24px 0;}
+    .hero-grid{grid-template-columns:1fr; gap:32px;}
+    .hero-sub{text-align:left;}
+    .hero-media{aspect-ratio:16/10; margin-left:0;}
+    .hero-slideshow{position:static; width:100%; height:auto; aspect-ratio:16/10; margin-left:0; transform:none; box-shadow:none;}
+    .hero-photo{aspect-ratio:4/5; margin-top:28px;}
+    .about{padding:64px 24px;}
+    .about-grid{grid-template-columns:1fr; gap:26px;}
+    .about-copy p{max-width:none;}
+    .mv{padding:0 24px 64px;}
+    .mv-grid{grid-template-columns:1fr; gap:44px;}
+    .services{padding:64px 24px 48px;}
+    .services-grid{grid-template-columns:1fr; gap:36px;}
+    .svc-cols{grid-template-columns:1fr 1fr; gap:24px;}
+    .trusted{padding:64px 24px;}
+    .trusted-grid{grid-template-columns:1fr; gap:32px;}
+    .logo-grid{grid-template-columns:repeat(2,1fr);}
+    footer{padding:64px 24px 28px;}
+    .footer-top{grid-template-columns:1fr 1fr; margin-left:0; max-width:none;}
+    .footer-bottom{flex-direction:column; gap:10px;}
+    .work-hero{padding:40px 24px 0;}
+    .work-grid{padding:32px 24px 64px; grid-template-columns:1fr; gap:28px;}
+    .cat-label{padding:8px 24px 0;}
+    .cat-grid{padding:24px 24px 64px; grid-template-columns:1fr 1fr; gap:24px;}
+    .proj-back{padding:32px 24px 0;}
+    .proj-intro{padding:20px 24px 48px;}
+    .proj-intro-grid{grid-template-columns:1fr; gap:20px;}
+    .proj-tag{text-align:left;}
+    .proj-title{padding:0 24px 32px;}
+    .proj-pair{padding:0 24px 40px; grid-template-columns:1fr;}
+    .proj-caption{padding:0 24px 56px; grid-template-columns:1fr; gap:16px;}
+    .proj-section-tag{padding:0 24px; flex-direction:column; gap:10px;}
+    .proj-section-tag p{text-align:left;}
+    .proj-mosaic{padding:0 24px 40px; grid-template-columns:1fr 1fr; gap:10px;}
+    .proj-reels{padding:0 24px 64px; grid-template-columns:1fr; gap:20px;}
+  }
+</style>
+<style>
+.gal{padding:0 48px 24px;}
+.gal-full img{width:100%; display:block; aspect-ratio:16/9; object-fit:cover;}
+.gal-trio{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:24px;}
+.gal-trio video,.gal-trio img{width:100%; aspect-ratio:9/16; object-fit:cover; display:block; background:#111;}
+.gal-trio.r45 video,.gal-trio.r45 img{aspect-ratio:4/5;}
+.gal-masonry{columns:3; column-gap:24px;}
+.gal-masonry img{width:100%; display:block; margin:0 0 24px; break-inside:avoid;}
+.proj-sub{max-width:640px; margin-top:16px; font-size:16px; line-height:1.6; color:#2b333c;}
+.svc-label{font-size:12.5px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--maroon); margin-bottom:8px;}
+.proj-back a{font-size:11.5px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted);}
+@media (max-width:860px){
+  .gal{padding:0 24px 16px;}
+  .gal-trio{grid-template-columns:1fr 1fr; gap:12px;}
+  .gal-masonry{columns:2; column-gap:12px;}
+  .gal-masonry img{margin-bottom:12px;}
+}
+.gal-grid{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:24px;}
+.gal-grid img,.gal-grid video{width:100%; aspect-ratio:4/5; object-fit:cover; display:block; background:transparent;}
+@media (max-width:860px){.gal-grid{grid-template-columns:1fr 1fr; gap:12px;}}
+.hero-split{padding:24px 48px 48px; display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:48px; align-items:center;}
+.hero-split img{width:100%; aspect-ratio:4/5; object-fit:cover; display:block;}
+.hero-copy h1{font-family:'Aileron', sans-serif; font-weight:800; font-size:clamp(34px, 4.4vw, 52px); letter-spacing:-0.015em; text-transform:uppercase;}
+.hero-copy .proj-sub{margin:12px 0 28px;}
+.hero-text{font-size:15.5px; line-height:1.7; color:#2b333c; max-width:52ch; margin-bottom:20px;}
+@media (max-width:860px){.hero-split{grid-template-columns:1fr; padding:20px 24px 48px; gap:28px;}}
+.gal-grid.g23 img,.gal-grid.g23 video{aspect-ratio:2/3;}
+.hero-split video{width:100%; aspect-ratio:2/3; object-fit:cover; display:block; background:transparent;}
+</style>
+<style>
+.gal-grid.bn-two{grid-template-columns:repeat(2, minmax(0,1fr)); margin-top:0;}
+.gal-grid.bn-two img{aspect-ratio:4/5;}
+.gal + .gal{padding-top:0;}
+.gal-reels{display:grid; grid-template-columns:minmax(0,400px); gap:16px;}
+.gal-reels video{width:100%; aspect-ratio:9/16; object-fit:cover; display:block; background:#e9e9e6;}
+@media (max-width:860px){.gal-reels{grid-template-columns:minmax(0,1fr);}}
+.st-grid{display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:16px;}
+.st-grid img{width:100%; aspect-ratio:9/16; object-fit:cover; display:block;}
+.st-grid.st4{grid-template-columns:repeat(4, minmax(0,1fr));}
+@media (max-width:860px){.st-grid,.st-grid.st4{grid-template-columns:1fr 1fr; gap:12px;}}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="nav">
+    <a class="logo-mark" href="index.html"><img src="assets/bdddfab5de5322af.png" alt="Bloom Studios logo"></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="work.html#work" class="active">Work</a>
+      <a href="work.html#about">The Studio</a>
+      <a href="career.html">Career</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu"><span></span></button>
+  </div>
+</header>
+<div class="page active" id="page-project-miell-social">
+  <div class="proj-back"><a href="social.html">← Social</a></div>
+
+  <section class="hero-split">
+    <img style="aspect-ratio:4/5;" alt="MIELL TIRANA cut out of rolled dough" src="assets/373ce23f55f72f6f.jpg">
+    <div class="hero-copy">
+      <h1>MIELL TIRANA</h1>
+      <p class="hero-text">Miell Tirana has been milling flour since 1995, the starting point for bread, pizza and pastries on thousands of Albanian tables. Building on the identity we designed for them, we run their social media: a feed that treats flour as a craft, with rich close-ups of bread and dough, heritage moments from the mill itself, and playful ideas like a loaf worn as a handbag or cookies disappearing one bite at a time.</p>
+      <p class="svc-label">Services</p>
+      <p class="hero-text" style="font-size:14px; margin-bottom:0;">Social Media Strategy · Creative Direction · Content Planning · Post Design</p>
+    </div>
+  </section>
+
+  <section class="proj-caption">
+    <p>The R from the logo becomes a character of its own, wrapping around stacks of bread and sitting quietly on every close-up, while hand-drawn type keeps the tone warm and human.</p>
+    <div><p>Warm crusts, soft creams and black-and-white heritage shots alternate across the grid, so the feed feels crafted and consistent, like the flour itself.</p><a href="work.html#project-miell" style="display:inline-block; margin-top:14px; font-size:13px; font-weight:700; letter-spacing:0.02em; color:var(--maroon); border-bottom:1px solid var(--maroon); padding-bottom:2px; text-decoration:none;">See branding →</a></div>
+  </section>
+
+  <section class="proj-section-tag">
+    <p class="svc-label" style="margin:0;">Feed</p>
+    <p>A selection of posts designed for Miell Tirana&rsquo;s Instagram and Facebook.</p>
+  </section>
+  <section class="gal"><div class="gal-grid">
+    <img loading="lazy" alt="What will you make with flour today? Bread, petulla, pizza, cake" src="assets/01013d65b1ebab2b.jpg">
+    <img loading="lazy" alt="Stack of breads wrapped by the Miell Tirana R" src="assets/89f641c978dcfadc.jpg">
+    <img loading="lazy" alt="MIELL TIRANA cut out of rolled dough" src="assets/373ce23f55f72f6f.jpg">
+  </div></section>
+  <section class="gal"><div class="gal-grid">
+    <img loading="lazy" alt="Pizzaiolo holding a pizza with dough flying against a red wall" src="assets/f777a89414f433d3.jpg">
+    <img loading="lazy" alt="Butter curl: when life gives you a little butter" src="assets/49092a9cd882ba6d.jpg">
+    <img loading="lazy" alt="Line drawing of the Miell Tirana mill over dough, since 1995" src="assets/0879260c930c4803.jpg">
+  </div></section>
+  <section class="gal"><div class="gal-grid">
+    <img loading="lazy" alt="Fork and knife pressed into flour: Miell Tirana as art" src="assets/765b689c5417ad22.jpg">
+    <img loading="lazy" alt="Why Miell Tirana? Every grain is the start of something made with love" src="assets/ffc8057428a42968.jpg">
+    <img loading="lazy" alt="Chocolate cookies disappearing bite by bite, pastry flour" src="assets/1eb3c131d45a7d02.jpg">
+  </div></section>
+  <section class="gal"><div class="gal-grid">
+    <img loading="lazy" alt="Drawn wheat over a hand on dough: on your table since 1995" src="assets/a06e1ed48bc88c11.jpg">
+    <img loading="lazy" alt="Loaf of bread carried like a handbag: carbs are my favourite accessory" src="assets/956f40c4b0f38e7d.jpg">
+    <img loading="lazy" alt="Close-up of breads with the Miell Tirana R" src="assets/ab323afbb8308b76.jpg">
+  </div></section>
+  <section class="proj-section-tag" style="margin-top:40px;">
+    <p class="svc-label" style="margin:0;">Stories</p>
+    <p>Instagram stories for Miell Tirana, pairing close-ups of bread and pastry with short hand-lettered lines.</p>
+  </section>
+  <section class="gal"><div class="st-grid st4">
+    <img loading="lazy" alt="Miell Tirana logo over hands dividing dough, black and white" src="assets/f5480f8e1b35def9.jpg">
+    <img loading="lazy" alt="Flour dusting a ball of dough: from our hands to your table" src="assets/4043d73f1ff25c7e.jpg">
+    <img loading="lazy" alt="Stack of pancakes: the secret to fluffy pancakes is Miell Tirana" src="assets/0b6e97e85eee843e.jpg">
+    <img loading="lazy" alt="Rows of unbaked croissants: quality flour and lots of flavour" src="assets/f7e444e6a152f5b0.jpg">
+    <img loading="lazy" alt="Stacked sourdough loaves: what starts with Miell Tirana ends on the table" src="assets/ce5f5a0601a1bd25.jpg">
+    <img loading="lazy" alt="Golden croissants: the morning aroma fresh from the oven" src="assets/d4340fdc27324ff8.jpg">
+    <img loading="lazy" alt="Backlit palmier slices: cut and ready to be enjoyed" src="assets/749262dbdf2597d1.jpg">
+    <img loading="lazy" alt="Raw to baked croissants: from unbaked shape to golden and crisp" src="assets/b3d2aeec9bac06fb.jpg">
+  </div></section>
+  <div style="height:48px;"></div>
+  <footer id="career-miell-social">
+  <div class="footer-top">
+    <div><span class="footer-label">Menu</span><a href="work.html#about">About</a><a href="work.html#work">Works</a><a href="work.html#about">The studio</a></div>
+    <div><span class="footer-label">Social</span><a href="https://www.instagram.com/_bloomstudios_/" target="_blank" rel="noopener">Instagram</a></div>
+    <div><span class="footer-label">Contact</span><a href="mailto:info@bloomstudios.eu">info@bloomstudios.eu</a><span>+355 69 556 1339</span><span>Rr. "Selita e Vjetër", pranë Kopshtit Botanik</span></div>
+  </div>
+  <img class="wordmark" alt="Bloom Studios" src="assets/38822a2663f55be7.png">
+  <div class="footer-bottom"><span>© 2026 Bloom Studios. All rights reserved.</span><span class="legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></span></div>
+</footer>
+</div>
+<script>
+  const menuBtn=document.getElementById('menuBtn');const navLinks=document.getElementById('navLinks');
+  if(menuBtn) menuBtn.addEventListener('click',()=>navLinks.classList.toggle('open'));
+</script>
+</body>
+</html>

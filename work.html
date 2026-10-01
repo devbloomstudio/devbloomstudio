@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bloom Studios — Where brands come to bloom</title>
+<style>
+
+  @font-face{
+    font-family:'Aileron';
+    src:url(assets/ee9d845c2b370a3a.otf) format('opentype');
+    font-weight:100;
+    font-style:normal;
+    font-display:swap;
+  }
+  @font-face{
+    font-family:'Aileron';
+    src:url(assets/ee4b6ef0bb1606ef.otf) format('opentype');
+    font-weight:200;
+    font-style:normal;
+    font-display:swap;
+  }
+  @font-face{
+    font-family:'Aileron';
+    src:url(assets/bf29e850d4c6dc3c.otf) format('opentype');
+    font-weight:300;
+    font-style:normal;
+    font-display:swap;
+  }
+  @font-face{
+    font-family:'Aileron';
+    src:url(assets/5a78965873fbce38.otf) format('opentype');
+    font-weight:400;
+    font-style:normal;
+    font-display:swap;
+  }
+  @font-face{
+    font-family:'Aileron';
+    src:url(assets/3c4affc8a57d6915.otf) format('opentype');
+    font-weight:600;
+    font-style:normal;
+    font-display:swap;
+  }
+  @font-face{
+    font-family:'Aileron';
+    src:url(assets/9daa863f1c9a0f9e.otf) format('opentype');
+    font-weight:700;
+    font-style:normal;
+    font-display:swap;
+  }
+  @font-face{
+    font-family:'Aileron';
+    src:url(assets/56a9def7cf4ad3ef.otf) format('opentype');
+    font-weight:800;
+    font-style:normal;
+    font-display:swap;
+  }
+  @font-face{
+    font-family:'Aileron';
+    src:url(assets/f9c3d80856ec2f23.otf) format('opentype');
+    font-weight:900;
+    font-style:normal;
+    font-display:swap;
+  }
+
+  :root{
+    --ink:#152230;
+    --cream:#ffffff;
+    --paper:#f7f1e3;
+    --lime:#e7ec7d;
+    --lime-2:#dfe86a;
+    --maroon:#5a1418;
+    --grey:#d9d9d6;
+    --grey-line:#e4e3df;
+    --muted:#5c6570;
+    --max:1240px;
+    font-family:'Aileron', sans-serif;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Aileron', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 48px;}
+  .page{display:none;}
+  .page.active{display:block;}
+
+  /* ---------- Header ---------- */
+  header{position:sticky; top:0; z-index:50; background:var(--cream);}
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:26px 48px;}
+  .logo-mark{font-family:'Aileron', sans-serif; font-weight:800; font-size:17px; line-height:0.85; letter-spacing:-0.02em; text-transform:lowercase; cursor:pointer; display:inline-block;}
+  .logo-mark img{height:60px; width:auto; display:block;}
+  .nav-links{display:flex; gap:36px; font-size:12.5px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase;}
+  .nav-links a{position:relative; padding-bottom:3px; transition:opacity .2s ease; cursor:pointer;}
+  .nav-links a:hover{opacity:.55;}
+  .nav-links a.active::after{content:""; position:absolute; left:0; right:0; bottom:-3px; height:2px; background:var(--ink);}
+  .menu-btn{display:none; background:none; border:none; cursor:pointer;}
+  .menu-btn span, .menu-btn span::before, .menu-btn span::after{content:""; display:block; width:22px; height:2px; background:var(--ink); position:relative; margin:5px 0;}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:64px 48px 0; min-height:100vh; display:flex; flex-direction:column; justify-content:center; box-sizing:border-box;}
+  .hero-grid{display:grid; width:100%; grid-template-columns:1.1fr 0.9fr; gap:24px; align-items:start; max-width:1240px; margin:0 auto;}
+  .hero h1{font-family:'Aileron', sans-serif; font-weight:800; font-size:clamp(58px, 7.8vw, 108px); line-height:0.94; letter-spacing:-0.01em; text-transform:uppercase; color:var(--ink);}
+  .hero-right{padding-top:8px;}
+  .hero-sub{font-size:12.5px; font-weight:600; line-height:1.55; letter-spacing:0.02em; text-align:right; color:var(--ink); margin-bottom:22px;}
+  .hero-reel{width:clamp(210px, 21vw, 300px); aspect-ratio:9/16; margin-left:auto; border-radius:0; overflow:hidden; box-shadow:0 18px 40px rgba(21,34,48,.22); background:var(--ink);}
+  .hero-reel video{width:100%; height:100%; object-fit:cover; display:block;}
+  .hero-media{width:100%; aspect-ratio:4/3; background:var(--grey); margin-left:auto; object-fit:cover;}
+  .hero-slideshow{position:fixed; top:50%; right:32px; transform:translateY(-50%); width:190px; height:245px; overflow:hidden; background:var(--grey); box-shadow:0 10px 30px rgba(21,34,48,.18); z-index:60;}
+  .hero-slide{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; background:var(--grey); opacity:0; transition:opacity .15s ease;}
+  .hero-slide.active{opacity:1;}
+  .hero-slideshow-label{position:absolute; left:8px; bottom:8px; z-index:2; font-size:9px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#fff; text-shadow:0 1px 3px rgba(0,0,0,.5);}
+  .scroll-cue{margin-top:64px; font-size:11.5px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); cursor:pointer; display:inline-block;}
+  .reveal{opacity:0; transform:translateY(28px); transition:opacity .8s cubic-bezier(.16,.8,.3,1), transform .8s cubic-bezier(.16,.8,.3,1);}
+  .reveal.in-view{opacity:1; transform:none;}
+  .reveal-1{transition-delay:.08s;}
+  .reveal-2{transition-delay:.16s;}
+  .reveal-3{transition-delay:.24s;}
+  .hero h1 .word-wrap{display:inline-block; overflow:hidden; vertical-align:top; padding-bottom:0.08em; margin-bottom:-0.08em;}
+  .hero h1 .word-wrap > span{display:inline-block; transform:translateY(115%); opacity:0; transition:transform 1s cubic-bezier(.16,.8,.3,1), opacity .7s ease;}
+  .hero h1.in-view .word-wrap > span{transform:translateY(0); opacity:1;}
+  .hero-photo{margin-top:40px; width:100%; max-width:1240px; margin-left:auto; margin-right:auto; aspect-ratio:16/6.2; object-fit:cover; object-position:center 52%; background:#e9e9e6;}
+
+  /* ---------- About ---------- */
+  .about{padding:120px 48px;}
+  .about-grid{display:grid; width:100%; grid-template-columns:300px 1fr; gap:40px; align-items:start; max-width:1240px; margin:0 auto;}
+  h2.section-title{font-family:'Aileron', sans-serif; font-weight:800; font-size:clamp(32px, 3.6vw, 44px); letter-spacing:-0.01em; color:var(--ink); text-transform:uppercase;}
+  .eyebrow{display:inline-block; margin-top:18px; font-size:11.5px; font-weight:700; letter-spacing:0.06em; color:var(--muted); cursor:pointer;}
+  .about-copy p{font-size:13.5px; line-height:1.65; color:#333d47; max-width:none; margin-bottom:16px;}
+  .about-copy p:last-child{margin-bottom:0;}
+
+  /* ---------- Mission / Vision ---------- */
+  .mv{padding:0 48px 96px; min-height:100vh; display:flex; flex-direction:column; justify-content:center; box-sizing:border-box;}
+  .mv-grid{display:grid; width:100%; grid-template-columns:1fr 1fr; gap:56px; max-width:1240px; margin:0 auto;}
+  .mv-block h3{font-family:'Aileron', sans-serif; font-weight:800; font-size:clamp(26px, 2.8vw, 34px); margin-bottom:22px; letter-spacing:-0.01em; text-transform:uppercase;}
+  .mv-media{width:100%; aspect-ratio:16/9; background:var(--grey); margin-bottom:22px;}
+  .mv-block p{font-size:13px; line-height:1.65; color:#333d47; margin-bottom:12px; max-width:none;}
+  .mv-block p:last-child{margin-bottom:0;}
+
+  /* ---------- Services ---------- */
+  .services{background:var(--lime); padding:120px 48px;}
+  .services-grid{display:grid; width:100%; grid-template-columns:300px 1fr; gap:24px; align-items:start; max-width:1240px; margin:0 auto;}
+  .services h2{font-family:'Aileron', sans-serif; font-weight:800; font-size:clamp(32px, 3.6vw, 44px); line-height:1; color:var(--ink); letter-spacing:-0.01em; text-transform:uppercase;}
+  .see-work{display:inline-block; margin-top:26px; font-size:12px; font-weight:700; letter-spacing:0.04em; color:var(--maroon); border-bottom:1.5px solid var(--maroon); padding-bottom:2px; cursor:pointer;}
+  .svc-cols{display:grid; grid-template-columns:1fr 1fr; gap:32px 48px;}
+  .svc-cat h4{font-size:11px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:var(--maroon); opacity:.75; margin-bottom:12px;}
+  .svc-cat ul{list-style:none;}
+  .svc-cat li{font-size:13.5px; font-weight:600; color:var(--ink); line-height:1.9;}
+  .svc-cat{margin-bottom:28px;}
+  .svc-cat:last-of-type, .svc-cols > .svc-cat:nth-child(3), .svc-cols > .svc-cat:nth-child(4){margin-bottom:0;}
+
+  /* ---------- Trusted by ---------- */
+  .trusted{padding:96px 48px;}
+  .trusted-grid{display:grid; width:100%; grid-template-columns:300px 1fr; gap:24px; align-items:center; max-width:1240px; margin:0 auto;}
+  .logo-grid{display:flex; flex-wrap:wrap; justify-content:center; row-gap:36px; column-gap:52px;}
+  .logo-grid .item{font-family:'Aileron', sans-serif; font-weight:800; font-size:15px; letter-spacing:0.02em; color:var(--ink); opacity:.5; display:flex; align-items:center; justify-content:center; height:42px; width:150px; flex:0 0 auto; gap:6px; transition:opacity .25s ease;}
+  .logo-grid .item:hover{opacity:.85;}
+  .logo-grid .item img{max-height:100%; max-width:100%; width:auto; height:auto; object-fit:contain; filter:grayscale(1);}
+  .logo-grid .item.featured{opacity:1; color:var(--maroon); font-size:13px; line-height:1.1; cursor:pointer; height:62px; width:170px;}
+  .logo-grid .item.featured:hover{opacity:1;}
+
+  /* ---------- Footer ---------- */
+  footer{padding:56px 48px 28px; border-top:1px solid var(--grey-line);}
+  .footer-top{display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; max-width:520px; margin-left:auto; font-size:12.5px; font-weight:600; margin-bottom:40px;}
+  .footer-top div{display:flex; flex-direction:column; gap:14px;}
+  .footer-label{font-size:10px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; opacity:.4; margin-bottom:2px;}
+  .footer-top a:hover{opacity:.6;}
+  .wordmark{display:block; width:100%; height:auto; user-select:none;}
+  .footer-bottom{display:flex; justify-content:space-between; margin-top:24px; font-size:11px; font-weight:600; letter-spacing:0.02em; color:var(--muted);}
+  .footer-bottom .legal{display:flex; gap:20px;}
+
+  /* ---------- Work page ---------- */
+  .work-hero{padding:64px 48px 8px;}
+  .work-hero h1{font-family:'Aileron', sans-serif; font-weight:800; font-size:clamp(24px, 2.6vw, 30px); letter-spacing:-0.01em; text-transform:uppercase;}
+  .work-grid{padding:56px 48px 96px; display:grid; grid-template-columns:repeat(3, 1fr); gap:32px;}
+  .work-col h4{font-size:11px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:var(--maroon); margin-bottom:18px;}
+  .work-thumb{width:100%; aspect-ratio:1/0.95; background:var(--grey); object-fit:cover; object-position:center 30%; display:block; transition:opacity .2s ease;}
+  .work-thumb.clickable{cursor:pointer;}
+  .work-thumb.clickable:hover{opacity:.75;}
+  .cat-label{padding:8px 48px 0;}
+  .cat-label h4{font-size:11px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:var(--maroon);}
+  .cat-grid{padding:24px 48px 96px; display:grid; grid-template-columns:repeat(3, 1fr); gap:32px;}
+  .cat-thumb{width:100%; aspect-ratio:1/1; background:var(--grey); margin-bottom:12px; transition:opacity .3s ease;}
+  .cat-card span{font-size:11.5px; font-weight:700; letter-spacing:0.03em; text-transform:uppercase; color:var(--ink);}
+  .cat-card.clickable{cursor:pointer;}
+  .cat-card.clickable:hover .cat-thumb{opacity:.85;}
+
+  /* ---------- Project page ---------- */
+  .proj-back{padding:48px 48px 0;}
+  .proj-back button{background:none; border:none; font-size:11.5px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); cursor:pointer;}
+  .proj-back a.back-home{font-size:11.5px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); text-decoration:none; cursor:pointer;}
+  .proj-back a.back-home:hover{color:var(--maroon);}
+  .proj-intro{padding:24px 48px 48px;}
+  .proj-intro-grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px; align-items:start;}
+  .proj-tag{font-size:12.5px; font-weight:700; letter-spacing:0.05em; color:var(--maroon); text-align:right;}
+  .proj-media{width:100%; aspect-ratio:1/1; background:var(--grey);}
+  .proj-media.cream{background:var(--paper);}
+  .proj-intro p{font-size:15.5px; line-height:1.7; color:#2b333c; max-width:52ch;}
+  .proj-title{padding:0 48px 48px;}
+  .proj-title h1{font-family:'Aileron', sans-serif; font-weight:800; font-size:clamp(34px, 4.4vw, 52px); letter-spacing:-0.015em; text-transform:uppercase;}
+  .proj-pair{padding:0 48px 56px; display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  .proj-pair .proj-media{aspect-ratio:4/3;}
+  .proj-caption{padding:0 48px 64px; display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  .proj-caption p{font-size:15.5px; line-height:1.7; color:#2b333c; max-width:52ch;}
+  .proj-caption a{display:inline-block; margin-top:12px; font-size:13px; font-weight:700; color:var(--maroon); border-bottom:1.5px solid var(--maroon);}
+  .proj-section-tag{padding:0 48px; display:flex; justify-content:space-between; align-items:flex-start; gap:24px; margin-bottom:22px;}
+  .proj-section-tag p{font-size:15.5px; line-height:1.7; color:#2b333c; max-width:52ch; text-align:right;}
+  .proj-mosaic{padding:0 48px 56px; display:grid; grid-template-columns:repeat(4, 1fr); gap:14px;}
+  .proj-mosaic .proj-media{aspect-ratio:3/4;}
+  .proj-reels{padding:0 48px 96px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px; align-items:start;}
+  .proj-reel{aspect-ratio:9/16; background:var(--grey); display:flex; align-items:flex-end; padding:14px;}
+  .proj-reel span{font-size:11px; font-weight:800; letter-spacing:0.06em;}
+  .proj-reels p{font-size:12.5px; line-height:1.65; color:#333d47;}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:860px){
+    .nav{padding:20px 24px;}
+    .nav-links{position:fixed; inset:0 0 0 auto; width:78%; height:100vh; background:var(--cream); flex-direction:column; justify-content:center; align-items:flex-start; gap:26px; padding:0 40px; transform:translateX(100%); transition:transform .3s ease; font-size:15px;}
+    .nav-links.open{transform:translateX(0); box-shadow:-8px 0 30px rgba(0,0,0,.08);}
+    .menu-btn{display:block;}
+    .hero{padding:40px 24px 0;}
+    .hero-grid{grid-template-columns:1fr; gap:32px;}
+    .hero-sub{text-align:left;}
+    .hero-media{aspect-ratio:16/10; margin-left:0;}
+    .hero-slideshow{position:static; width:100%; height:auto; aspect-ratio:16/10; margin-left:0; transform:none; box-shadow:none;}
+    .hero-photo{aspect-ratio:4/5; margin-top:28px;}
+    .about{padding:64px 24px;}
+    .about-grid{grid-template-columns:1fr; gap:26px;}
+    .about-copy p{max-width:none;}
+    .mv{padding:0 24px 64px;}
+    .mv-grid{grid-template-columns:1fr; gap:44px;}
+    .services{padding:64px 24px 48px;}
+    .services-grid{grid-template-columns:1fr; gap:36px;}
+    .svc-cols{grid-template-columns:1fr 1fr; gap:24px;}
+    .trusted{padding:64px 24px;}
+    .trusted-grid{grid-template-columns:1fr; gap:32px;}
+    .logo-grid{grid-template-columns:repeat(2,1fr);}
+    footer{padding:64px 24px 28px;}
+    .footer-top{grid-template-columns:1fr 1fr; margin-left:0; max-width:none;}
+    .footer-bottom{flex-direction:column; gap:10px;}
+    .work-hero{padding:40px 24px 0;}
+    .work-grid{padding:32px 24px 64px; grid-template-columns:1fr; gap:28px;}
+    .cat-label{padding:8px 24px 0;}
+    .cat-grid{padding:24px 24px 64px; grid-template-columns:1fr 1fr; gap:24px;}
+    .proj-back{padding:32px 24px 0;}
+    .proj-intro{padding:20px 24px 48px;}
+    .proj-intro-grid{grid-template-columns:1fr; gap:20px;}
+    .proj-tag{text-align:left;}
+    .proj-title{padding:0 24px 32px;}
+    .proj-pair{padding:0 24px 40px; grid-template-columns:1fr;}
+    .proj-caption{padding:0 24px 56px; grid-template-columns:1fr; gap:16px;}
+    .proj-section-tag{padding:0 24px; flex-direction:column; gap:10px;}
+    .proj-section-tag p{text-align:left;}
+    .proj-mosaic{padding:0 24px 40px; grid-template-columns:1fr 1fr; gap:10px;}
+    .proj-reels{padding:0 24px 64px; grid-template-columns:1fr; gap:20px;}
+  }
+
+  .career-hero{padding:72px 48px 56px;}
+  .career-hero h1{font-family:'Aileron', sans-serif; font-weight:800; font-size:clamp(38px, 5.4vw, 64px); line-height:1.02; letter-spacing:-0.02em; text-transform:uppercase; color:var(--ink);}
+  .career-list{padding:0 48px 120px;}
+  .job-row{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,2fr) minmax(0,1fr); align-items:center; padding:22px 0; border-bottom:1.5px solid var(--lime);}
+  .job-team{font-size:11px; font-weight:400; letter-spacing:0.02em; text-transform:uppercase; color:var(--ink);}
+  .job-title{font-family:'Aileron', sans-serif; font-weight:800; font-size:clamp(16px, 1.6vw, 20px); letter-spacing:-0.005em; text-transform:uppercase; text-align:center; color:var(--ink);}
+  .job-apply{justify-self:end; font-size:11px; letter-spacing:0.02em; text-transform:uppercase; color:var(--maroon); text-decoration:none; border-bottom:1px solid transparent; transition:border-color .2s ease;}
+  .job-apply:hover{border-color:var(--maroon);}
+  @media (max-width:860px){
+    .career-hero{padding:48px 24px 36px;}
+    .career-list{padding:0 24px 80px;}
+    .job-row{grid-template-columns:1fr auto; grid-template-areas:"team apply" "title title"; row-gap:8px;}
+    .job-team{grid-area:team;} .job-apply{grid-area:apply;} .job-title{grid-area:title; text-align:center;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="logo-mark" href="index.html"><img src="assets/55a6fb8534a25e16.png" alt="Bloom Studios logo"></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a data-nav="work">Work</a>
+      <a href="studio.html">The Studio</a>
+      <a data-nav="career">Career</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu"><span></span></button>
+  </div>
+</header>
+
+<!-- ============ HOME PAGE ============ -->
+<div class="page" id="page-home">
+<main>
+
+  <section class="hero">
+    <div class="hero-grid">
+      <h1 class="word-anim">Where brands<br>come to bloom.</h1>
+      <div class="hero-right">
+        <p class="hero-sub reveal reveal-1">Where strategy, aesthetics and<br>storytelling come together.</p>
+        <div class="hero-reel reveal reveal-2">
+          <video autoplay muted loop playsinline preload="auto" src="assets/91c587ef11d8e7bd.mp4"></video>
+        </div>
+      </div>
+    </div>
+    <span class="scroll-cue" data-anchor="about">↓ About us</span>
+    <img class="hero-photo" alt="Vintage radio and disco ball still life against exposed brick" src="assets/10deca275283ab2f.jpg">
+  </section>
+
+  <section class="about" id="about">
+    <div class="about-grid">
+      <div>
+        <h2 class="section-title reveal">About us</h2>
+        <span class="eyebrow" data-nav="home" data-anchor="mission-vision">↓ Mission &amp; vision</span>
+      </div>
+      <div class="about-copy reveal reveal-1">
+        <p>We are a strategic content and creative studio built around a strong belief in aesthetics, quality and purpose. Founded in 2021, Bloom Studios grew from a passion in photography into a multidisciplinary studio where visual storytelling, creative direction and digital strategy come together.</p>
+        <p>We partner with brands to create distinctive identities, meaningful content and digital experiences designed not only to look good, but to perform.</p>
+        <p>We're always drawn to ambitious ideas, new challenges and brands ready to grow.</p>
+        <p>Will yours be next?</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mv" id="mission-vision">
+    <div class="mv-grid">
+      <div class="mv-block">
+        <h3 class="reveal">Mission</h3>
+        <img class="mv-media" alt="Product photography setup with softboxes and wine bottle" style="object-fit:cover;" src="assets/0092df9b4e275a2f.jpg">
+        <p>To build digital presences that feel distinctive, relevant and impossible to overlook.</p>
+        <p>We combine strategy, creativity and high quality content to help brands communicate with clarity, connect with the right audience and grow with purpose.</p>
+      </div>
+      <div class="mv-block">
+        <h3 class="reveal">Vision</h3>
+        <img class="mv-media" alt="Creative work session with laptop illustration and wine" style="object-fit:cover;" src="assets/c4b664130430e048.jpg">
+        <p>To shape brands that stand out visually &amp; strategically. We believe the strongest brands are built where storytelling, design and strategy meet.</p>
+        <p>Our vision is to create work that feels authentic, performs with purpose and builds lasting value beyond the feed.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="services">
+    <div class="services-grid">
+      <div>
+        <h2 class="reveal">Our<br>services</h2>
+        <span class="see-work" data-nav="work">See work →</span>
+      </div>
+      <div class="svc-cols">
+        <div class="svc-cat">
+          <h4>Branding</h4>
+          <ul><li>Brand &amp; Strategy</li><li>Positioning &amp; Copy</li><li>Naming</li><li>Storytelling</li><li>Logos &amp; Brand Marks</li></ul>
+        </div>
+        <div class="svc-cat">
+          <h4>Digital</h4>
+          <ul><li>Web Design</li><li>Digital Campaigns</li><li>Meta / Google Ads</li><li>Digital Presence</li></ul>
+        </div>
+        <div class="svc-cat">
+          <h4>Content</h4>
+          <ul><li>Photography</li><li>Video</li><li>Reels</li><li>Campaign Production</li><li>Product / Food / Hospitality Content</li></ul>
+        </div>
+        <div class="svc-cat">
+          <h4>Social</h4>
+          <ul><li>Social Media Strategy</li><li>Creative Direction</li><li>Content Planning</li><li>Design</li><li>Community / Account Management</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trusted">
+    <div class="trusted-grid">
+      <h2 class="section-title reveal">Trusted by</h2>
+      <div class="logo-grid">
+        <div class="item"><img src="assets/394605be5fbc4f6e.png" alt="Aiba"></div>
+        <div class="item"><img src="assets/6bce7d8e2c06a8e9.svg" alt="Bannu"></div>
+        <div class="item"><img src="assets/808a27f520c67b99.svg" alt="Conad"></div>
+        <div class="item"><img src="assets/b36257ad30e6d9e3.svg" alt="Skenderbeu"></div>
+        <div class="item featured" data-nav="project-miell"><img src="assets/10a91daa091abfb2.png" alt="Miell Tirana"></div>
+        <div class="item"><img src="assets/92dbb50b50f7e4a0.svg" alt="Mövenpick"></div>
+        <div class="item"><img src="assets/d692ca5afa4b7b1b.svg" alt="Sushico"></div>
+        <div class="item"><img src="assets/50965950037b3483.svg" alt="Teuta"></div>
+        <div class="item"><img src="assets/7098856f2eb748d8.png" alt="Ujvara"></div>
+        <div class="item"><img src="assets/09fb8e0ed9d0cd73.svg" alt="EHW"></div>
+        <div class="item"><img src="assets/565a975421c3975a.svg" alt="FIX"></div>
+      </div>
+    </div>
+  </section>
+
+<footer id="career">
+  <div class="footer-top">
+    <div><span class="footer-label">Menu</span><a href="studio.html">About</a><a data-nav="work">Works</a><a href="studio.html">The studio</a></div>
+    <div><span class="footer-label">Social</span><a href="https://www.instagram.com/_bloomstudios_/" target="_blank" rel="noopener">Instagram</a></div>
+    <div><span class="footer-label">Contact</span><a href="mailto:info@bloomstudios.eu" target="_top">info@bloomstudios.eu</a><span>+355 69 556 1339</span><span>Rr. "Selita e Vjetër", pranë Kopshtit Botanik</span></div>
+  </div>
+  <img class="wordmark" alt="Bloom Studios" src="assets/38822a2663f55be7.png">
+  <div class="footer-bottom"><span>© 2026 Bloom Studios. All rights reserved.</span><span class="legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></span></div>
+</footer>
+
+</main>
+</div>
+
+
+<!-- ============ CAREER PAGE ============ -->
+<div class="page" id="page-career">
+  <section class="career-hero"><h1 class="reveal">Interested in<br>working with us?</h1></section>
+  <section class="career-list">
+      <div class="job-row">
+        <span class="job-team">Design team</span>
+        <h3 class="job-title">Social Media Designer</h3>
+        <a class="job-apply" href="mailto:info@bloomstudios.eu?subject=Application%20%E2%80%93%20Social%20Media%20Designer" target="_top">Apply now</a>
+      </div>
+      <div class="job-row">
+        <span class="job-team">Content team</span>
+        <h3 class="job-title">Content Creator</h3>
+        <a class="job-apply" href="mailto:info@bloomstudios.eu?subject=Application%20%E2%80%93%20Content%20Creator" target="_top">Apply now</a>
+      </div>
+      <div class="job-row">
+        <span class="job-team">Content team</span>
+        <h3 class="job-title">Photographer</h3>
+        <a class="job-apply" href="mailto:info@bloomstudios.eu?subject=Application%20%E2%80%93%20Photographer" target="_top">Apply now</a>
+      </div>
+      <div class="job-row">
+        <span class="job-team">Content team</span>
+        <h3 class="job-title">Videographer</h3>
+        <a class="job-apply" href="mailto:info@bloomstudios.eu?subject=Application%20%E2%80%93%20Videographer" target="_top">Apply now</a>
+      </div>
+  </section>
+  <footer id="career-page">
+  <div class="footer-top">
+    <div><span class="footer-label">Menu</span><a href="studio.html">About</a><a data-nav="work">Works</a><a href="studio.html">The studio</a></div>
+    <div><span class="footer-label">Social</span><a href="https://www.instagram.com/_bloomstudios_/" target="_blank" rel="noopener">Instagram</a></div>
+    <div><span class="footer-label">Contact</span><a href="mailto:info@bloomstudios.eu" target="_top">info@bloomstudios.eu</a><span>+355 69 556 1339</span><span>Rr. "Selita e Vjetër", pranë Kopshtit Botanik</span></div>
+  </div>
+  <img class="wordmark" alt="Bloom Studios" src="assets/38822a2663f55be7.png">
+  <div class="footer-bottom"><span>© 2026 Bloom Studios. All rights reserved.</span><span class="legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></span></div>
+</footer>
+</div>
+<!-- ============ WORK PAGE ============ -->
+<div class="page active" id="page-work">
+  <div class="proj-back"><a class="back-home" href="index.html">← Home</a></div>
+  <section class="work-hero"><h1>Where brands come to bloom.</h1></section>
+  <section class="work-grid">
+    <div class="work-col">
+      <h4>Brand Identity</h4>
+      <img class="work-thumb clickable" data-nav="cat-branding" alt="Hands holding Pastelitos branded coffee cups" src="assets/87f82a4ac0f05416.jpg">
+    </div>
+    <div class="work-col">
+      <h4>Social</h4>
+      <a href="social.html" style="display:block;"><img class="work-thumb clickable" alt="Hands holding a Movenpick Hotel Lalez Durres coffee cup" src="assets/1b4c5567aff4ec8a.jpg"></a>
+    </div>
+    <div class="work-col">
+      <h4>Content</h4>
+      <a href="content.html" style="display:block;"><img class="work-thumb clickable" alt="Aiba red eggs cartons with tomatoes and chili flakes" src="assets/09db2e171efb93e3.jpg"></a>
+    </div>
+  </section>
+  <footer id="career-work">
+    <div class="footer-top">
+      <div><span class="footer-label">Menu</span><a href="studio.html">About</a><a data-nav="work">Works</a><a href="studio.html">The studio</a></div>
+      <div><span class="footer-label">Social</span><a href="https://www.instagram.com/_bloomstudios_/" target="_blank" rel="noopener">Instagram</a></div>
+      <div><span class="footer-label">Contact</span><a href="mailto:info@bloomstudios.eu" target="_top">info@bloomstudios.eu</a><span>+355 69 556 1339</span><span>Rr. "Selita e Vjetër", pranë Kopshtit Botanik</span></div>
+    </div>
+    <img class="wordmark" alt="Bloom Studios" src="assets/38822a2663f55be7.png">
+    <div class="footer-bottom"><span>© 2026 Bloom Studios. All rights reserved.</span><span class="legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></span></div>
+  </footer>
+</div>
+
+<!-- ============ CATEGORY: BRAND IDENTITY ============ -->
+<div class="page" id="page-cat-branding">
+  <div class="proj-back"><button data-nav="work">← Work</button></div>
+
+  <section class="work-hero"><h1>Where brands come to bloom.</h1></section>
+  <section class="cat-label"><h4>Brand Identity</h4></section>
+  <section class="cat-grid">
+    <div class="cat-card clickable" data-nav="project-miell"><img class="cat-thumb" style="object-fit:cover;" alt="Miell Tirana logo" src="assets/75a938d9ac57423a.jpg"><span>Miell Tirana</span></div>
+    <div class="cat-card clickable" data-nav="project-select-watches"><img class="cat-thumb" style="object-fit:cover;" alt="Select Watches gold S logo over crossed wrists wearing watches" src="assets/45dae879682c43d2.jpg"><span>Select Watches</span></div>
+    <div class="cat-card clickable" data-nav="project-ujvara"><img class="cat-thumb" style="object-fit:cover;" alt="Ujvara wordmark on deep green background" src="assets/aeac6de8779fff8b.jpg"><span>Ujvara</span></div>
+    <div class="cat-card clickable" data-nav="project-stiven-kafe"><img class="cat-thumb" style="object-fit:cover;" alt="Stiven Kafe Turke logo in cream on terracotta" src="assets/094ad60f3eaa392c.jpg"><span>Stiven Kafe</span></div>
+    <div class="cat-card clickable" data-nav="project-erlin"><img class="cat-thumb" style="object-fit:cover;" alt="Erlin chef-hat wordmark in cream on deep green" src="assets/6bbd84dca37abd62.jpg"><span>Erlin</span></div>
+    <div class="cat-card clickable" data-nav="project-pastelitos"><img class="cat-thumb" style="object-fit:cover;" alt="Pastelitos wordmark in cream on navy" src="assets/021d8d3f0dbc4066.jpg"><span>Pastelitos</span></div>
+    <div class="cat-card clickable" data-nav="project-gjumza"><img class="cat-thumb" style="object-fit:cover;" alt="Gjumza wordmark with sleepy Z letters on lime green" src="assets/ddc3816022433061.jpg"><span>Gjumza</span></div>
+    <a class="cat-card clickable" href="tirana-villas.html" style="display:block;"><img class="cat-thumb" style="object-fit:cover;" alt="Tirana Villas logo in silver grey on deep burgundy" src="assets/e882915d6e40b026.jpg"><span>Tirana Villas</span></a>
+    <div class="cat-card clickable" data-nav="project-the-one"><img class="cat-thumb" style="object-fit:cover;" alt="The One Residence wordmark on the building facade, shot from below" src="assets/9c17007c4ab72cd3.jpg"><span>The One</span></div>
+    <div class="cat-card clickable" data-nav="project-calma"><img class="cat-thumb" style="object-fit:cover;" alt="Calma logo in white on warm brown" src="assets/c961b8f91b5e9a19.jpg"><span>Calma</span></div>
+    <div class="cat-card clickable" data-nav="project-kontur-residences"><img class="cat-thumb" style="object-fit:cover;" alt="Kontur Residences logo in gold on forest green" src="assets/d36fec8417765db0.jpg"><span>Kontur Residences</span></div>
+  </section>
+
+  <footer id="career-cat-branding">
+    <div class="footer-top">
+      <div><span class="footer-label">Menu</span><a href="studio.html">About</a><a data-nav="work">Works</a><a href="studio.html">The studio</a></div>
+      <div><span class="footer-label">Social</span><a href="https://www.instagram.com/_bloomstudios_/" target="_blank" rel="noopener">Instagram</a></div>
+      <div><span class="footer-label">Contact</span><a href="mailto:info@bloomstudios.eu" target="_top">info@bloomstudios.eu</a><span>+355 69 556 1339</span><span>Rr. "Selita e Vjetër", pranë Kopshtit Botanik</span></div>
+    </div>
+    <img class="wordmark" alt="Bloom Studios" src="assets/38822a2663f55be7.png">
+    <div class="footer-bottom"><span>© 2026 Bloom Studios. All rights reserved.</span><span class="legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></span></div>
+  </footer>
+</div>
+
+<!-- ============ CATEGORY: SOCIAL ============ -->
+<div class="page" id="page-cat-social">
+  <div class="proj-back"><button data-nav="work">← Work</button></div>
+
+  <section class="work-hero"><h1>Where brands come to bloom.</h1></section>
+  <section class="cat-label"><h4>Social</h4></section>
+  <section class="cat-grid">
+    <div class="cat-card"><div class="cat-thumb"></div><span>Erlin</span></div>
+    <div class="cat-card"><div class="cat-thumb"></div><span>Pastelitos</span></div>
+  </section>
+
+  <footer id="career-cat-social">
+    <div class="footer-top">
+      <div><span class="footer-label">Menu</span><a href="studio.html">About</a><a data-nav="work">Works</a><a href="studio.html">The studio</a></div>
+      <div><span class="footer-label">Social</span><a href="https://www.instagram.com/_bloomstudios_/" target="_blank" rel="noopener">Instagram</a></div>
+      <div><span class="footer-label">Contact</span><a href="mailto:info@bloomstudios.eu" target="_top">info@bloomstudios.eu</a><span>+355 69 556 1339</span><span>Rr. "Selita e Vjetër", pranë Kopshtit Botanik</span></div>
+    </div>
+    <img class="wordmark" alt="Bloom Studios" src="assets/38822a2663f55be7.png">
+    <div class="footer-bottom"><span>© 2026 Bloom Studios. All rights reserved.</span><span class="legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></span></div>
+  </footer>
+</div>
+
+<!-- ============ CATEGORY: CONTENT ============ -->
+<div class="page" id="page-cat-content">
+  <div class="proj-back"><button data-nav="work">← Work</button></div>
+
+  <section class="work-hero"><h1>Where brands come to bloom.</h1></section>
+  <section class="cat-label"><h4>Content</h4></section>
+  <section class="cat-grid">
+    <div class="cat-card"><div class="cat-thumb"></div><span>Calma</span></div>
+    <div class="cat-card"><div class="cat-thumb"></div><span>Kontur</span></div>
+    <div class="cat-card"><div class="cat-thumb"></div><span>Gjumza</span></div>
+    <div class="cat-card"><div class="cat-thumb"></div><span>Stiven Kafe</span></div>
+    <a class="cat-card clickable" href="conad.html" style="display:block;"><img class="cat-thumb" style="object-fit:cover;" alt="Hands holding a Verso Natura CONAD pizza box on a terrazzo surface" src="assets/aae512dc19214e1f.jpg"><span>CONAD</span></a>
+  </section>
+
+  <footer id="career-cat-content">
+    <div class="footer-top">
+      <div><span class="footer-label">Menu</span><a href="studio.html">About</a><a data-nav="work">Works</a><a href="studio.html">The studio</a></div>
+      <div><span class="footer-label">Social</span><a href="https://www.instagram.com/_bloomstudios_/" target="_blank" rel="noopener">Instagram</a></div>
+      <div><span class="footer-label">Contact</span><a href="mailto:info@bloomstudios.eu" target="_top">info@bloomstudios.eu</a><span>+355 69 556 1339</span><span>Rr. "Selita e Vjetër", pranë Kopshtit Botanik</span></div>
+    </div>
+    <img class="wordmark" alt="Bloom Studios" src="assets/38822a2663f55be7.png">
+    <div class="footer-bottom"><span>© 2026 Bloom Studios. All rights reserved.</span><span class="legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></span></div>
+  </footer>
+</div>
+
+<!-- ============ PROJECT: MIELL TIRANA ============ -->
+<div class="page" id="page-project-miell">
+  <div class="proj-back"><button data-nav="cat-branding">← Brand Identity</button></div>
+
+  <section class="proj-intro">
+    <div class="proj-intro-grid">
+      <img class="proj-media" style="object-fit:cover;" alt="Miell Tirana since 1995 - building illustration in hand" src="assets/363a1e33a41d55dd.jpg">
+      <img class="proj-media cream" style="object-fit:cover;" alt="Wheat field detail with logomark illustration" src="assets/382fe2042cde7268.jpg">
+      <div>
+        <p>For Miell Tirana, we reimagined the identity of one of Albania's established flour producers, evolving it from a traditional image into a cleaner, more contemporary and professional brand. The rebrand reflects the company's growth and its focus on quality, reliability, technology and international standards.</p>
+        <div style="margin-top:22px;">
+          <div class="proj-tag" style="text-align:left; margin-bottom:8px;">Services</div>
+          <p style="font-size:14px; line-height:1.7; color:#2b333c; max-width:52ch;">Rebranding · Creative Direction · Logo Design · Visual Identity · Typography &amp; Color System · Illustration Direction · Packaging · Brand Applications</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="proj-title">
+    <h1>Miell Tirana</h1>
+    <p style="max-width:640px; margin-top:16px; font-size:16px; line-height:1.6; color:#2b333c;">A new identity for a brand rooted in tradition and built for what comes next.</p>
+  </section>
+
+  <section class="proj-pair">
+    <img class="proj-media cream" style="object-fit:cover;" alt="Miell Tirana full logo lockup" src="assets/db5a3b11bc8fb132.jpg">
+    <img class="proj-media" style="object-fit:cover;" alt="Miell Tirana outdoor billboard mockup" src="assets/5295bf7d3a7fb756.jpg">
+  </section>
+  <section class="proj-caption">
+    <p>At the heart of the new identity is a distinctive symbol combining the letterform with wheat — connecting the brand directly to its product and heritage while giving it a stronger, more recognizable presence. An earthy palette of greens, wheat-inspired neutrals and warm golden tones reinforces the connection to grain and origin.</p>
+    <div>
+      <p>The system extends beyond the logo into typography, illustration, packaging, corporate materials and large-scale applications, creating a flexible identity that bridges Miell Tirana's heritage with a more modern future.</p>
+      <a href="miell-social.html">See social media →</a>
+    </div>
+  </section>
+  <section class="proj-pair">
+    <img class="proj-media" style="object-fit:cover;" alt="Miell Tirana flour packaging bags" src="assets/2dd703a74b71eb3a.jpg">
+    <img class="proj-media" style="object-fit:cover;" alt="Miell Tirana bread close-up with logomark" src="assets/337946d58d6fcc37.jpg">
+  </section>
+  <footer id="career-miell">
+    <div class="footer-top">
+      <div><span class="footer-label">Menu</span><a href="studio.html">About</a><a data-nav="work">Works</a><a href="studio.html">The studio</a></div>
+      <div><span class="footer-label">Social</span><a href="https://www.instagram.com/_bloomstudios_/" target="_blank" rel="noopener">Instagram</a></div>
+      <div><span class="footer-label">Contact</span><a href="mailto:info@bloomstudios.eu" target="_top">info@bloomstudios.eu</a><span>+355 69 556 1339</span><span>Rr. "Selita e Vjetër", pranë Kopshtit Botanik</span></div>
+    </div>
+    <img class="wordmark" alt="Bloom Studios" src="assets/38822a2663f55be7.png">
+    <div class="footer-bottom"><span>© 2026 Bloom Studios. All rights reserved.</span><span class="legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></span></div>
+  </footer>
+</div>
+
+<!-- ============ PROJECT: SELECT WATCHES ============ -->
+<div class="page" id="page-project-select-watches">
+  <div class="proj-back"><button data-nav="cat-branding">← Brand Identity</button></div>
+
+  <section class="proj-intro">
+    <div class="proj-intro-grid">
+      <img class="proj-media" style="object-fit:cover;" alt="Select Watches circular hook logo mark on navy background" src="assets/fcddfaeeca8d5484.jpg">
+      <img class="proj-media cream" style="object-fit:cover;" alt="Black and white photo of a wrist wearing a watch with Select Watches wordmark" src="assets/ea4245d4a5cf7be5.jpg">
+      <div>
+        <p>For Select Watches, we created a cleaner and more distinctive identity designed to reflect the brand's focus on quality, trust and carefully selected timepieces. The new symbol brings together the letter S and the visual language of a watch, with details inspired by watch hands introducing a subtle sense of movement.</p>
+        <div style="margin-top:22px;">
+          <div class="proj-tag" style="text-align:left; margin-bottom:8px;">Services</div>
+          <p style="font-size:14px; line-height:1.7; color:#2b333c; max-width:52ch;">Rebranding · Creative Direction · Logo Design · Visual Identity · Typography &amp; Color System · Packaging · Retail &amp; Digital Applications</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="proj-title">
+    <h1>Select Watches</h1>
+    <p style="max-width:640px; margin-top:16px; font-size:16px; line-height:1.6; color:#2b333c;">A refined identity for a destination built on precision and timeless style.</p>
+  </section>
+
+  <section class="proj-pair">
+    <img class="proj-media cream" style="object-fit:cover;" alt="Select Watches symbol origin: watch plus S equals logo" src="assets/21ce5f1d88a0b78e.jpg">
+    <img class="proj-media" style="object-fit:cover;" alt="Select Watches app icon on a smartphone home screen" src="assets/69864397fdd65fa8.jpg">
+  </section>
+  <section class="proj-caption">
+    <p>A minimalist wordmark and restrained palette of deep navy, silver grey and warm cream give the identity an elegant, contemporary character.</p>
+    <div>
+      <p>The system was designed to work seamlessly across the physical store, packaging and digital touchpoints, creating a consistent and recognizable presence.</p>
+      <a href="social.html">See social media →</a>
+    </div>
+  </section>
+  <section class="proj-pair">
+    <img class="proj-media" style="object-fit:cover;" alt="Select Watches branded shopping bag" src="assets/3acda0c0796358ce.jpg">
+    <img class="proj-media" style="object-fit:cover;" alt="Select Watches repeating S hook pattern" src="assets/03c264f17934c4dc.jpg">
+  </section>
+  <footer id="career-select-watches">
+    <div class="footer-top">
+      <div><span class="footer-label">Menu</span><a href="studio.html">About</a><a data-nav="work">Works</a><a href="studio.html">The studio</a></div>
+      <div><span class="footer-label">Social</span><a href="https://www.instagram.com/_bloomstudios_/" target="_blank" rel="noopener">Instagram</a></div>
+      <div><span class="footer-label">Contact</span><a href="mailto:info@bloomstudios.eu" target="_top">info@bloomstudios.eu</a><span>+355 69 556 1339</span><span>Rr. "Selita e Vjetër", pranë Kopshtit Botanik</span></div>
+    </div>
+    <img class="wordmark" alt="Bloom Studios" src="assets/38822a2663f55be7.png">
+    <div class="footer-bottom"><span>© 2026 Bloom Studios. All rights reserved.</span><span class="legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></span></div>
+  </footer>
+</div>
+
+<!-- ============ PROJECT: UJVARA ============ -->
+<div class="page" id="page-project-ujvara">
+  <div class="proj-back"><button data-nav="cat-branding">← Brand Identity</button></div>
+
+  <section class="proj-intro">
+    <div class="proj-intro-grid">
+      <img class="proj-media" style="object-fit:cover;" alt="Ujvara wordmark pattern in tan on a cream background" src="assets/c75e5d6109fe976e.jpg">
+      <img class="proj-media cream" style="object-fit:cover;" alt="Ujvara table coasters in four brand colorways" src="assets/dced9559d6545f4b.jpg">
+      <div>
+        <p>For Ujvara, we developed a refined visual identity around the idea of movement, simplicity and natural flow. The custom wordmark draws from the meaning of Ujvara &mdash; Waterfall, translating its fluidity into an elegant, minimal form.</p>
+        <div style="margin-top:24px;">
+          <p style="font-size:12.5px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--maroon); margin-bottom:8px;">Services</p>
+          <p style="font-size:15.5px; line-height:1.7; color:#2b333c; max-width:52ch;">Creative Direction · Logo Design · Brand Identity · Visual System · Typography &amp; Color Palette · Brand Guidelines · Print &amp; Brand Applications</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="proj-title">
+    <h1>Ujvara</h1>
+    <p style="max-width:640px; margin-top:16px; font-size:16px; line-height:1.6; color:#2b333c;">An earthy palette of deep greens, warm neutrals and soft natural tones creates a sophisticated yet organic character.</p>
+  </section>
+
+  <section class="proj-pair">
+    <img class="proj-media cream" style="object-fit:cover;" alt="Ujvara business card and greeting card layouts on brand green" src="assets/0f836516bcaaba54.jpg">
+    <img class="proj-media" style="object-fit:cover;" alt="Ujvara envelopes with patterned flaps in four colorways" src="assets/37e98c5bf498e925.jpg">
+  </section>
+  <section class="proj-caption">
+    <p>Combined with a clean typographic system and subtle patterns, the identity was designed to feel contemporary while remaining closely connected to the restaurant experience.</p>
+    <div>
+      <p>The visual system extends across menus, tableware, uniforms, stationery, packaging and digital applications, creating a consistent brand experience throughout every touchpoint.</p>
+      <a href="ujvara-social.html">See social media →</a>
+    </div>
+  </section>
+  <section class="proj-pair">
+    <img class="proj-media" style="object-fit:cover;" alt="Ujvara menus for desserts, pasta and main courses with colored pattern borders" src="assets/746c4c63a73219e0.jpg">
+    <img class="proj-media" style="object-fit:cover;" alt="Ujvara patterned table napkins with corner wordmarks" src="assets/f70a963dfa37def9.jpg">
+  </section>
+  <footer id="career-ujvara">
+    <div class="footer-top">
+      <div><span class="footer-label">Menu</span><a href="studio.html">About</a><a data-nav="work">Works</a><a href="studio.html">The studio</a></div>
+      <div><span class="footer-label">Social</span><a href="https://www.instagram.com/_bloomstudios_/" target="_blank" rel="noopener">Instagram</a></div>
+      <div><span class="footer-label">Contact</span><a href="mailto:info@bloomstudios.eu" target="_top">info@bloomstudios.eu</a><span>+355 69 556 1339</span><span>Rr. "Selita e Vjetër", pranë Kopshtit Botanik</span></div>
+    </div>
+    <img class="wordmark" alt="Bloom Studios" src="assets/38822a2663f55be7.png">
+    <div class="footer-bottom"><span>© 2026 Bloom Studios. All rights reserved.</span><span class="legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></span></div>
+  </footer>
+</div>
+
+<!-- ============ PROJECT: GJUMZA ============ -->
+<div class="page" id="page-project-gjumza">
+  <div class="proj-back"><button data-nav="cat-branding">← Brand Identity</button></div>
+
+  <section class="proj-intro">
+    <div class="proj-intro-grid">
+      <img class="proj-media" style="object-fit:cover;" alt="Gjumza gift box wrapped in Zzz pattern tissue paper with a round logo sticker" src="assets/e796cac668dd4b31.jpg">
+      <img class="proj-media cream" style="object-fit:cover;" alt="Deep plum Gjumza shopping bag with lime wordmark" src="assets/28a06ce0cf37f23b.jpg">
+      <div>
+        <p>For GJUMZA, we created a warm and contemporary brand identity that turns everyday comfort into a distinctive visual world. The concept is rooted in the feeling of home, slow mornings, cozy moments and the simple pleasure of feeling completely at ease.</p>
+        <div style="margin-top:24px;">
+          <p style="font-size:12.5px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--maroon); margin-bottom:8px;">Services</p>
+          <p style="font-size:15.5px; line-height:1.7; color:#2b333c; max-width:52ch;">Brand Strategy · Creative Direction · Logo Design · Visual Identity · Tone of Voice · Typography &amp; Color System · Brand Guidelines · Packaging · Photography Direction</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="proj-title">
+    <h1>Gjumza</h1>
+    <p style="max-width:640px; margin-top:16px; font-size:16px; line-height:1.6; color:#2b333c;">A playful identity built around the feeling of comfort.</p>
+  </section>
+
+  <section class="proj-pair">
+    <img class="proj-media cream" style="object-fit:cover;" alt="Gjumza wordmark in lime green on deep plum" src="assets/f7b41149b1f1e30b.jpg">
+    <img class="proj-media" style="object-fit:cover;" alt="Gjumza sticker collection in plum, lime, cream and blue" src="assets/794654dddc26553f.jpg">
+  </section>
+  <section class="proj-caption">
+    <p>At the heart of the identity is a playful &ldquo;Zzz&rdquo; symbol, integrated directly into the custom wordmark and developed into a recognizable graphic element of its own. A bold combination of deep plum and fresh green, balanced with soft neutrals and pastel accents, gives the brand a character that feels both relaxed and confident.</p>
+    <div>
+      <p>The visual language extends into patterns, hand-drawn icons, packaging and photography direction, creating a cohesive identity designed to feel warm, approachable and memorable across every touchpoint.</p>
+    </div>
+  </section>
+  <section class="proj-pair">
+    <img class="proj-media" style="object-fit:cover;" alt="Gjumza brand pattern of blue Zzz symbols on cream" src="assets/f3b19ede9ed43a0a.jpg">
+    <img class="proj-media" style="object-fit:cover;" alt="Gjumza business card front and back" src="assets/522d9d9077316551.jpg">
+  </section>
+  <footer id="career-gjumza">
+    <div class="footer-top">
+      <div><span class="footer-label">Menu</span><a href="studio.html">About</a><a data-nav="work">Works</a><a href="studio.html">The studio</a></div>
+      <div><span class="footer-label">Social</span><a href="https://www.instagram.com/_bloomstudios_/" target="_blank" rel="noopener">Instagram</a></div>
+      <div><span class="footer-label">Contact</span><a href="mailto:info@bloomstudios.eu" target="_top">info@bloomstudios.eu</a><span>+355 69 556 1339</span><span>Rr. "Selita e Vjetër", pranë Kopshtit Botanik</span></div>
+    </div>
+    <img class="wordmark" alt="Bloom Studios" src="assets/38822a2663f55be7.png">
+    <div class="footer-bottom"><span>© 2026 Bloom Studios. All rights reserved.</span><span class="legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></span></div>
+  </footer>
+</div>
+
+<!-- ============ PROJECT: ERLIN ============ -->
+<div class="page" id="page-project-erlin">
+  <div class="proj-back"><button data-nav="cat-branding">← Brand Identity</button></div>
+
+  <section class="proj-intro">
+    <div class="proj-intro-grid">
+      <img class="proj-media" style="object-fit:cover;" alt="Erlin chef-hat wordmark in cream on deep green" src="assets/d2e463a24ddb6f3a.jpg">
+      <img class="proj-media cream" style="object-fit:cover;" alt="Hands shaping dough with the Erlin logo overlaid" src="assets/d89effa9c7c26cd9.jpg">
+      <div>
+        <p>For ERLIN, we created a distinctive visual identity inspired by one of the most recognizable symbols of the culinary world: the chef&rsquo;s hat. Its form becomes the foundation of the logo, giving the brand an immediate connection to food, craftsmanship and expertise.</p>
+        <div style="margin-top:24px;">
+          <p style="font-size:12.5px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--maroon); margin-bottom:8px;">Services</p>
+          <p style="font-size:15.5px; line-height:1.7; color:#2b333c; max-width:52ch;">Creative Direction · Logo Design · Brand Identity · Visual System · Typography &amp; Color Palette · Packaging · Brand Applications</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="proj-title">
+    <h1>Erlin</h1>
+    <p style="max-width:640px; margin-top:16px; font-size:16px; line-height:1.6; color:#2b333c;">A bold identity shaped by the craft behind the brand.</p>
+  </section>
+
+  <section class="proj-pair">
+    <img class="proj-media cream" style="object-fit:cover;" alt="Erlin vertical logo in red on cream with tagline Shije me autoritet" src="assets/3e93babee967c0f3.jpg">
+    <img class="proj-media" style="object-fit:cover;" alt="Erlin horizontal logo in cream on deep green" src="assets/00b9deacfc3e7f1d.jpg">
+  </section>
+  <section class="proj-caption">
+    <p>A deep green, warm cream and rich red palette gives the identity a confident yet approachable character, while the expressive typography and graphic system make ERLIN instantly recognizable across different applications.</p>
+    <div>
+      <p>The identity extends into packaging, stickers, digital applications and a repeatable brand pattern, creating a flexible visual language built around ERLIN&rsquo;s positioning: &ldquo;Shije me autoritet.&rdquo;</p>
+      <a href="erlin-social.html">See social media →</a>
+    </div>
+  </section>
+  <section class="proj-pair">
+    <img class="proj-media" style="object-fit:cover;" alt="Erlin round stickers and profile pictures in green, red and cream" src="assets/d21c1c7aacf09a2f.jpg">
+    <img class="proj-media" style="object-fit:cover;" alt="Erlin packaging label with pastry photo on red" src="assets/7ea56a6a69e5e8c7.jpg">
+  </section>
+  <footer id="career-erlin">
+    <div class="footer-top">
+      <div><span class="footer-label">Menu</span><a href="studio.html">About</a><a data-nav="work">Works</a><a href="studio.html">The studio</a></div>
+      <div><span class="footer-label">Social</span><a href="https://www.instagram.com/_bloomstudios_/" target="_blank" rel="noopener">Instagram</a></div>
+      <div><span class="footer-label">Contact</span><a href="mailto:info@bloomstudios.eu" target="_top">info@bloomstudios.eu</a><span>+355 69 556 1339</span><span>Rr. "Selita e Vjetër", pranë Kopshtit Botanik</span></div>
+    </div>
+    <img class="wordmark" alt="Bloom Studios" src="assets/38822a2663f55be7.png">
+    <div class="footer-bottom"><span>© 2026 Bloom Studios. All rights reserved.</span><span class="legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></span></div>
+  </footer>
+</div>
+
+<!-- ============ PROJECT: CALMA ============ -->
+<div class="page" id="page-project-calma">
+  <div class="proj-back"><button data-nav="cat-branding">← Brand Identity</button></div>
+
+  <section class="proj-intro">
+    <div class="proj-intro-grid">
+      <img class="proj-media" style="object-fit:cover;" alt="Calma tissue wrapping paper with monogram pattern and logo card" src="assets/8a707fc13a1b1880.jpg">
+      <img class="proj-media cream" style="object-fit:cover;" alt="White Calma towel box on a beige leather sofa" src="assets/61215c235547a1d0.jpg">
+      <div>
+        <p>For CALMA, a Home &amp; Hotel Linen brand, we created a refined visual identity inspired by softness, comfort and quiet elegance. The concept translates the tactile nature of linen into a warm, understated visual language designed to feel both contemporary and timeless.</p>
+        <div style="margin-top:24px;">
+          <p style="font-size:12.5px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--maroon); margin-bottom:8px;">Services</p>
+          <p style="font-size:15.5px; line-height:1.7; color:#2b333c; max-width:52ch;">Brand Strategy · Creative Direction · Logo Design · Visual Identity · Typography &amp; Color System · Brand Guidelines · Packaging Design</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="proj-title">
+    <h1>Calma</h1>
+    <p style="max-width:640px; margin-top:16px; font-size:16px; line-height:1.6; color:#2b333c;">A brand identity built around the feeling of calm.</p>
+  </section>
+
+  <section class="proj-pair">
+    <img class="proj-media cream" style="object-fit:cover;" alt="Stacked brown Calma linen boxes with window cutouts" src="assets/ea28276f919aa23c.jpg">
+    <img class="proj-media" style="object-fit:cover;" alt="Embossed Calma business cards front and back" src="assets/2355ef7797d6c9d9.jpg">
+  </section>
+  <section class="proj-caption">
+    <p>The identity combines a delicate custom symbol with elegant typography and a muted, earthy palette of warm neutrals.</p>
+    <div>
+      <p>The system was developed to remain consistent across every brand touchpoint, from business cards and textile labels to shopping bags and product packaging.</p>
+      <a href="social.html">See social media →</a>
+    </div>
+  </section>
+  <section class="proj-pair">
+    <img class="proj-media" style="object-fit:cover;" alt="Brown Calma Home & Hotel Line label card on white linen" src="assets/82a7dd6ab9d4d399.jpg">
+    <img class="proj-media" style="object-fit:cover;" alt="Calma paper shopping bag in a dark sculptural setting" src="assets/82468f2866147b44.jpg">
+  </section>
+  <footer id="career-calma">
+    <div class="footer-top">
+      <div><span class="footer-label">Menu</span><a href="studio.html">About</a><a data-nav="work">Works</a><a href="studio.html">The studio</a></div>
+      <div><span class="footer-label">Social</span><a href="https://www.instagram.com/_bloomstudios_/" target="_blank" rel="noopener">Instagram</a></div>
+      <div><span class="footer-label">Contact</span><a href="mailto:info@bloomstudios.eu" target="_top">info@bloomstudios.eu</a><span>+355 69 556 1339</span><span>Rr. "Selita e Vjetër", pranë Kopshtit Botanik</span></div>
+    </div>
+    <img class="wordmark" alt="Bloom Studios" src="assets/38822a2663f55be7.png">
+    <div class="footer-bottom"><span>© 2026 Bloom Studios. All rights reserved.</span><span class="legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></span></div>
+  </footer>
+</div>
+
+<!-- ============ PROJECT: THE ONE ============ -->
+<div class="page" id="page-project-the-one">
+  <div class="proj-back"><button data-nav="cat-branding">← Brand Identity</button></div>
+
+  <section class="proj-intro">
+    <div class="proj-intro-grid">
+      <img class="proj-media" style="object-fit:cover;" alt="The One Residence tower viewed from below, diagonal glass facade against the sky" src="assets/9a963da7b5f40e8d.jpg">
+      <img class="proj-media cream" style="object-fit:cover;" alt="The One Residence moodboard with isometric building renders on cream background" src="assets/fbc8cbf80ef49ed7.jpg">
+      <div>
+        <p>For The One, we built a bold brand identity for a luxury residence and business address in Tirana's Bllok district, where the perfect location meets modern architecture, premium materials and a distinctly elegant character.</p>
+        <div style="margin-top:22px;">
+          <div class="proj-tag" style="text-align:left; margin-bottom:8px;">Services</div>
+          <p style="font-size:14px; line-height:1.7; color:#2b333c; max-width:52ch;">Brand Strategy · Creative Direction · Logo Design · Visual Identity · Typography &amp; Color System · Brand Guidelines · Signage · Print &amp; Brand Applications</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="proj-title">
+    <h1>The One</h1>
+    <p style="max-width:640px; margin-top:16px; font-size:16px; line-height:1.6; color:#2b333c;">A confident palette of deep teal, gypsum and signal red paired with a bold, architectural wordmark &mdash; elegant, simple and impossible to miss.</p>
+  </section>
+
+  <section class="proj-pair">
+    <img class="proj-media cream" style="object-fit:cover;" alt="The One visitor cards in teal, gypsum and red with the wordmark and diagonal accent" src="assets/91f1cc7f48114ea4.jpg">
+    <img class="proj-media" style="object-fit:cover;" alt="The One brochure cover held in hand, teal cover with isometric building illustrations" src="assets/9446f26fd15ee726.jpg">
+  </section>
+  <section class="proj-caption">
+    <p>The mark itself takes its form from the building: the letter O reimagined through the facade's vertical and diagonal lines, rendered in a modular, architectural typeface that echoes the tower's bold cuts.</p>
+    <div>
+      <p>The identity extends across stationery, signage, print materials and digital touchpoints &mdash; always paired with the studio's signature line: not for everyone.</p>
+    </div>
+  </section>
+  <section class="proj-pair">
+    <img class="proj-media" style="object-fit:cover;" alt="The One wordmark etched on a glass facade, reflecting trees and daylight" src="assets/ae3fffd64670fcea.jpg">
+    <img class="proj-media" style="object-fit:cover;" alt="The One roll-up posters in teal, red and gypsum installed on a storefront window" src="assets/e737d43a2243bba8.jpg">
+  </section>
+  <footer id="career-the-one">
+    <div class="footer-top">
+      <div><span class="footer-label">Menu</span><a href="studio.html">About</a><a data-nav="work">Works</a><a href="studio.html">The studio</a></div>
+      <div><span class="footer-label">Social</span><a href="https://www.instagram.com/_bloomstudios_/" target="_blank" rel="noopener">Instagram</a></div>
+      <div><span class="footer-label">Contact</span><a href="mailto:info@bloomstudios.eu" target="_top">info@bloomstudios.eu</a><span>+355 69 556 1339</span><span>Rr. "Selita e Vjetër", pranë Kopshtit Botanik</span></div>
+    </div>
+    <img class="wordmark" alt="Bloom Studios" src="assets/38822a2663f55be7.png">
+    <div class="footer-bottom"><span>© 2026 Bloom Studios. All rights reserved.</span><span class="legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></span></div>
+  </footer>
+</div>
+
+<!-- ============ PROJECT: PASTELITOS ============ -->
+<div class="page" id="page-project-pastelitos">
+  <div class="proj-back"><button data-nav="cat-branding">← Brand Identity</button></div>
+
+  <section class="proj-intro">
+    <div class="proj-intro-grid">
+      <img class="proj-media" style="object-fit:cover;" alt="Hand-drawn To Go coffee cup illustration on Pastelitos stripes" src="assets/1d272b0c40ba3cc9.jpg">
+      <img class="proj-media cream" style="object-fit:cover;" alt="Striped Pastelitos cup carrier with navy coffee cups" src="assets/1cbeb12c926aeb30.jpg">
+      <div>
+        <p>For Pastelitos, we developed a contemporary rebrand built around simplicity, warmth and personality. A clean, characterful wordmark is paired with a distinctive striped visual language, giving the brand an instantly recognizable presence that feels nostalgic and modern at the same time.</p>
+        <div style="margin-top:24px;">
+          <p style="font-size:12.5px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--maroon); margin-bottom:8px;">Services</p>
+          <p style="font-size:14px; line-height:1.7; color:#2b333c; max-width:52ch;">Rebranding · Creative Direction · Logo Design · Visual Identity · Color System · Illustration · Packaging Design · Brand Applications</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="proj-title">
+    <h1>Pastelitos</h1>
+    <p style="max-width:640px; margin-top:16px; font-size:16px; line-height:1.6; color:#2b333c;">A fresh identity with a playful take on everyday bakery culture.</p>
+  </section>
+
+  <section class="proj-pair">
+    <img class="proj-media cream" style="object-fit:cover;" alt="Striped Pastelitos bread sleeves with baguettes and a loaf" src="assets/5f528da2bc86cc57.jpg">
+    <img class="proj-media" style="object-fit:cover;" alt="Navy and brown striped Pastelitos cookie box with window" src="assets/9c8592d2e91e1b01.jpg">
+  </section>
+  <section class="proj-caption">
+    <p>Soft yellow and powder blue meet deeper shades of navy and brown, creating a flexible palette that moves naturally between light, playful moments and richer product-focused applications. Hand-drawn illustrations add another layer of personality, bringing an informal, human feel to the identity.</p>
+    <div>
+      <p>The system comes to life through takeaway packaging, coffee cups, bread sleeves and pastry boxes, turning simple everyday objects into recognizable Pastelitos brand moments.</p>
+      <a href="pastelitos-social.html">See social media →</a>
+    </div>
+  </section>
+  <section class="proj-pair">
+    <img class="proj-media" style="object-fit:cover;" alt="Striped Pastelitos pastry bag with a croissant on yellow" src="assets/2d4545ff1f3ce3c2.jpg">
+    <img class="proj-media" style="object-fit:cover;" alt="Illustration of stacked brown coffee cups on Pastelitos stripes" src="assets/e3d8a471fb8b5fab.jpg">
+  </section>
+    <section class="proj-pair">
+    <img class="proj-media" style="object-fit:cover;" alt="Close-up of a glazed chocolate pastry with the Pastelitos wordmark" src="assets/bf85b2b83fb2283a.jpg">
+    <img class="proj-media" style="object-fit:cover;" alt="Pastelitos color palette in brown, navy, cream, yellow and powder blue" src="assets/62c2b9497fbe0986.jpg">
+  </section>
+  <footer id="career-pastelitos">
+    <div class="footer-top">
+      <div><span class="footer-label">Menu</span><a href="studio.html">About</a><a data-nav="work">Works</a><a href="studio.html">The studio</a></div>
+      <div><span class="footer-label">Social</span><a href="https://www.instagram.com/_bloomstudios_/" target="_blank" rel="noopener">Instagram</a></div>
+      <div><span class="footer-label">Contact</span><a href="mailto:info@bloomstudios.eu" target="_top">info@bloomstudios.eu</a><span>+355 69 556 1339</span><span>Rr. "Selita e Vjetër", pranë Kopshtit Botanik</span></div>
+    </div>
+    <img class="wordmark" alt="Bloom Studios" src="assets/38822a2663f55be7.png">
+    <div class="footer-bottom"><span>© 2026 Bloom Studios. All rights reserved.</span><span class="legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></span></div>
+  </footer>
+</div>
+
+<!-- ============ PROJECT: KONTUR RESIDENCES ============ -->
+<div class="page" id="page-project-kontur-residences">
+  <div class="proj-back"><button data-nav="cat-branding">← Brand Identity</button></div>
+
+  <section class="proj-intro">
+    <div class="proj-intro-grid">
+      <img class="proj-media" style="object-fit:cover;" alt="Brass Kontur Residences key tags hanging against a wooden wall" src="assets/2b06f8878bdb9ff2.jpg">
+      <img class="proj-media cream" style="object-fit:cover;" alt="Kontur Residences logo in gold on forest green" src="assets/d36fec8417765db0.jpg">
+      <div>
+        <p>For Kontur Residences, we developed a refined visual identity built around the idea of creating more than residences, creating an address with its own character. The brand is grounded in thoughtful architecture, lasting quality and a vision of contemporary living designed to retain its relevance over time.</p>
+        <div style="margin-top:24px;">
+          <p style="font-size:12.5px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--maroon); margin-bottom:8px;">Services</p>
+          <p style="font-size:15.5px; line-height:1.7; color:#2b333c; max-width:52ch;">Brand Strategy · Creative Direction · Logo Design · Visual Identity · Tone of Voice · Typography &amp; Color System · Brand Guidelines · Brand Applications</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="proj-title">
+    <h1>Kontur Residences</h1>
+    <p style="max-width:640px; margin-top:16px; font-size:16px; line-height:1.6; color:#2b333c;">An identity shaped by architecture, place and a sense of belonging.</p>
+  </section>
+
+  <section class="proj-pair">
+    <img class="proj-media cream" style="object-fit:cover;" alt="Three Kontur Residences outdoor posters mounted on a stone wall" src="assets/1854730bd1b2b5b0.jpg">
+    <img class="proj-media" style="object-fit:cover;" alt="Kontur Residences logo construction grid" src="assets/4ef7211fd6b0fa6a.jpg">
+  </section>
+  <section class="proj-caption">
+    <p>The visual language combines a distinctive architectural logomark with elegant typography and a sophisticated palette of forest green, warm gold and natural linen tones. The result is understated and confident, reflecting the brand&rsquo;s values of timelessness, precision and refined design.</p>
+    <div>
+      <p>The identity extends across print, environmental applications and branded assets, creating a cohesive system around the central idea: &ldquo;Një adresë me identitet.&rdquo;</p>
+      <a href="kontur-social.html">See social media →</a>
+    </div>
+  </section>
+    <section class="proj-pair" style="grid-template-columns:1fr;">
+    <img class="proj-media" style="object-fit:cover; aspect-ratio:16/9;" alt="Green Kontur Residences book on a wooden coffee table" src="assets/b2116e0a9f677eb9.jpg">
+  </section>
+  <footer id="career-kontur-residences">
+    <div class="footer-top">
+      <div><span class="footer-label">Menu</span><a href="studio.html">About</a><a data-nav="work">Works</a><a href="studio.html">The studio</a></div>
+      <div><span class="footer-label">Social</span><a href="https://www.instagram.com/_bloomstudios_/" target="_blank" rel="noopener">Instagram</a></div>
+      <div><span class="footer-label">Contact</span><a href="mailto:info@bloomstudios.eu" target="_top">info@bloomstudios.eu</a><span>+355 69 556 1339</span><span>Rr. "Selita e Vjetër", pranë Kopshtit Botanik</span></div>
+    </div>
+    <img class="wordmark" alt="Bloom Studios" src="assets/38822a2663f55be7.png">
+    <div class="footer-bottom"><span>© 2026 Bloom Studios. All rights reserved.</span><span class="legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></span></div>
+  </footer>
+</div>
+
+<!-- ============ PROJECT: STIVEN KAFE ============ -->
+<div class="page" id="page-project-stiven-kafe">
+  <div class="proj-back"><button data-nav="cat-branding">← Brand Identity</button></div>
+
+  <section class="proj-intro">
+    <div class="proj-intro-grid">
+      <img class="proj-media" style="object-fit:cover;" alt="Paper sacks filled with roasted coffee beans" src="assets/a90e5f9b93d998af.jpg">
+      <img class="proj-media cream" style="object-fit:cover;" alt="Stiven Kafe Turke logo in cream on terracotta" src="assets/094ad60f3eaa392c.jpg">
+      <div>
+        <p>For STIVEN, we created a complete brand identity that brings the heritage of Turkish coffee into a contemporary, refined visual world. The concept is built around warmth, craftsmanship and tradition, positioning STIVEN as a premium brand without losing its authentic roots.</p>
+        <div style="margin-top:24px;">
+          <p style="font-size:12.5px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--maroon); margin-bottom:8px;">Services</p>
+          <p style="font-size:15.5px; line-height:1.7; color:#2b333c; max-width:52ch;">Brand Strategy · Visual Identity · Logo Design · Color &amp; Typography System · Graphic Elements · Brand Guidelines</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="proj-title">
+    <h1>Stiven Kafe</h1>
+    <p style="max-width:640px; margin-top:16px; font-size:16px; line-height:1.6; color:#2b333c;">A timeless identity rooted in the ritual of Turkish coffee.</p>
+  </section>
+
+  <section class="proj-pair">
+    <img class="proj-media cream" style="object-fit:cover;" alt="Stiven brand patterns in terracotta and dark coffee brown" src="assets/e0d54f04c87bcd27.jpg">
+    <img class="proj-media" style="object-fit:cover;" alt="Stiven logo on terracotta, coffee brown, cream and burgundy backgrounds" src="assets/833d06c33feb1367.jpg">
+  </section>
+  <section class="proj-caption">
+    <p>At the heart of the identity is a custom symbol inspired by the geometry of the coffee bean and the delicate form of the coffee flower. The mark becomes a subtle expression of nature, ritual and repetition &mdash; designed to feel distinctive yet timeless.</p>
+    <div>
+      <p>An earthy palette of deep coffee tones, terracotta and warm cream, paired with a clean typographic system and custom graphic patterns, creates a cohesive visual language across packaging, print and digital touchpoints.</p>
+    </div>
+  </section>
+  <section class="proj-pair">
+    <img class="proj-media" style="object-fit:cover;" alt="Stiven Kafe Turke coffee pod packaging, front and back" src="assets/d1ff96cc200060f6.jpg">
+    <img class="proj-media" style="object-fit:cover;" alt="Stiven color palette in terracotta, coffee brown, cream and burgundy" src="assets/c4496063e832e27c.jpg">
+  </section>
+  <footer id="career-stiven-kafe">
+    <div class="footer-top">
+      <div><span class="footer-label">Menu</span><a href="studio.html">About</a><a data-nav="work">Works</a><a href="studio.html">The studio</a></div>
+      <div><span class="footer-label">Social</span><a href="https://www.instagram.com/_bloomstudios_/" target="_blank" rel="noopener">Instagram</a></div>
+      <div><span class="footer-label">Contact</span><a href="mailto:info@bloomstudios.eu" target="_top">info@bloomstudios.eu</a><span>+355 69 556 1339</span><span>Rr. "Selita e Vjetër", pranë Kopshtit Botanik</span></div>
+    </div>
+    <img class="wordmark" alt="Bloom Studios" src="assets/38822a2663f55be7.png">
+    <div class="footer-bottom"><span>© 2026 Bloom Studios. All rights reserved.</span><span class="legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></span></div>
+  </footer>
+</div>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+  const pages = document.querySelectorAll('.page');
+  function showPage(id, anchor){
+    if(id==='home'){ id='work'; anchor=null; }
+    pages.forEach(p => p.classList.toggle('active', p.id === 'page-' + id));
+    window.scrollTo(0,0);
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.classList.toggle('active', a.dataset.nav === id && !a.dataset.anchor);
+    });
+    navLinks.classList.remove('open');
+    if(anchor){
+      requestAnimationFrame(() => {
+        const el = document.getElementById(anchor);
+        if(el) el.scrollIntoView({behavior:'smooth'});
+      });
+    }
+  }
+
+  document.querySelectorAll('[data-nav]').forEach(el => {
+    el.addEventListener('click', () => showPage(el.dataset.nav, el.dataset.anchor));
+  });
+
+  (function(){const h=(location.hash||'').replace('#','');if(!h)return;if(document.getElementById('page-'+h)){showPage(h);}else if(document.getElementById(h)){showPage('home',h);}})();
+  document.querySelectorAll('.scroll-cue[data-anchor]').forEach(el => {
+    el.addEventListener('click', () => {
+      const target = document.getElementById(el.dataset.anchor);
+      if(target) target.scrollIntoView({behavior:'smooth'});
+    });
+  });
+
+  const heroH1 = document.querySelector('.hero h1.word-anim');
+  if(heroH1){
+    heroH1.innerHTML = heroH1.innerHTML.split('<br>').map(line =>
+      line.trim().split(' ').map(word => `<span class="word-wrap"><span>${word}</span></span>`).join(' ')
+    ).join('<br>');
+    heroH1.querySelectorAll('.word-wrap > span').forEach((span, i) => {
+      span.style.transitionDelay = (i * 0.09) + 's';
+    });
+    requestAnimationFrame(() => {
+      setTimeout(() => heroH1.classList.add('in-view'), 150);
+    });
+  }
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.15, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+</script>
+
+</body>
+</html>
